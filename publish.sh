@@ -22,4 +22,6 @@ echo "Generating site"
 hugo
 
 echo "Updating master branch"
-cd public && git add --all && git commit -m "Publishing to master (publish.sh)"
+message=$(git log -1 --pretty=%B)
+
+cd public && git add --all && git commit -m "Publishing to master (publish.sh)" -m "$message"
