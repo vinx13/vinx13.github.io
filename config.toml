@@ -15,19 +15,10 @@ footnotereturnlinkcontents = "↩"
     name = "Home"
     url = "/"
     weight = 1
-[[menu.main]]
-    name = "Categories"
-    url = "/categories/"
-    weight = 2
-[[menu.main]]
-    name = "Tags"
-    url = "/tags/"
-    weight = 3
 [[menu.feed]]
     name = "Subscribe"
     url = "/index.xml"
 
 [params]
-    description = "A simple, minimal blog for those who love text."
-    footer = "©2018 Wuwei Lin | [Github](https://github.com/vinx13)"
+    footer = "©2018 Wuwei Lin | Theme by [Hugo-Classic](https://github.com:vinx13/hugo-classic)" 
     custom_css = ["css/theme-override.css"]
