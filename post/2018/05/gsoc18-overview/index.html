@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GsoC&#39;18: Overview | Wuwei Lin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <nav>
+    <ul>
+      
+      
+      
+      
+      <li class="pull-left ">
+        <a href="/">home</a>
+      </li>
+      
+
+      
+      
+      <li class="pull-right">
+        <a href="/index.xml">subscribe</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">GsoC&#39;18: Overview</span></h1>
+
+<h2 class="date">2018/05/05</h2>
+<p class="terms">
+  
+  
+  
+  
+  Tags: <a href="/tags/gsoc">GSoC</a> <a href="/tags/shogun">Shogun</a> 
+  
+  
+</p>
+</div>
+
+
+
+<main>
+<p>Projects of GSoC&rsquo;18 were announced last week and I am happy that I will be working on <a href="http://shogun.ml">Shogun</a> over this summer. In this post, I am pleased to share some details of my project.</p>
+
+<p>Shogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C++ and providing interface in different languages via SWIG, it is a great place to hack.</p>
+
+<p>My project, <a href="https://summerofcode.withgoogle.com/projects/#6031654070517760">Continuous Detoxification</a>, will focus on redesigning and refactoring, aiming at modernizing Shogun&rsquo;s codebase and improving experience for both users and developers. As a project lasting for more than ten years, some parts of Shogun are old and not well-designed. For example, parallel cross validation is not thread safe because features are modified in some algorithms and thus cannot be shared. So, as the first part of my project, I would like to make features immutable. There are several blockers that need to be addressed first. Algorithms that rely on mutation of features will be refactored and preprocessors which are coupled with features need to be redesigned as well. Besides, views of features and labels will be introduced to enable sharing underlying data between features or labels. Some other parts will be taken care as well for thread safety. After we have immutable features, we can safely enable parallel cross validation.</p>
+
+<p>Un-templated matrix and vector are another part, meaning that we will have Matrix and Vector instread of SGMatrix<T> and SGVector<T> and hide the specific premitive type from algorithm implementations. This is a continuation from the project last year. The previous PR uses a big switch to dispatch to typed functions on the fly. Though it has demonstrated a basic approach to implementing typeless data types, it is not very effective as we don&rsquo;t like to switch every time we use it, especailly in a loop. I&rsquo;m hoping to bring lazy evaluation to make it effective. Inspired by the broad usage of the powerful expression template in several libraries (Eigen, uBlas, mshadow), I will take advantages of it to support lazy evaluation of typeless data types. Note that in Shogun the primary goal we utilize lazy evaluation is to prevent type switches, so the design will be a bit different. I will discuss it in the following posts. After we have implemented something that can put into real use, we can consider refactor of existing code. This will be a huge task and will be done in the future.</p>
+
+<p>To share more details about my project with wider audience outside the community, I will keep myself updated in the following weeks here in this blog as we go on.</p>
+
+</main>
+
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-90229954-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+      
+      <hr/>
+      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      
+    </footer>
+  </body>
+</html>
+

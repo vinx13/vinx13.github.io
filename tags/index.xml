@@ -6,9 +6,28 @@
     <description>Recent content in Tags on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GSoC</title>
+      <link>/tags/gsoc/</link>
+      <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gsoc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shogun</title>
+      <link>/tags/shogun/</link>
+      <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shogun/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
