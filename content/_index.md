@@ -17,4 +17,4 @@ Bowen Pan, **Wuwei Lin**, Xiaolin Fang, Chaoqin Huang, Bolei Zhou, Cewu Lu.
 Computer Vision and Pattern Recognition (CVPR), 2018 
 
 ### Posts
-(Comming soon)
+
