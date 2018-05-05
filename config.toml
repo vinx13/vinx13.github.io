@@ -25,5 +25,9 @@ canonifyURLs = true
     footer = "©2018 Wuwei Lin | Theme by [Hugo-Classic](https://github.com/vinx13/hugo-classic)" 
     custom_css = ["css/theme-override.css"]
 
+[author]
+    name = "Wuwei Lin"
+
+
 [taxonomies]
   tag = "tags"
