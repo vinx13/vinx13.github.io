@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "http://wuwei.io/"
 languageCode = "en-us"
 title = "Wuwei Lin"
 theme = "hugo-classic"
@@ -8,7 +8,7 @@ preserveTaxonomyNames = true
 enableEmoji = true
 footnotereturnlinkcontents = "↩"
 enableRobotsTXT = true
-canonifyURLs = true
+canonifyURLs = false
 
 [permalinks]
     post = "/post/:year/:month/:slug/"
