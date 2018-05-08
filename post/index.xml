@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Wuwei Lin</title>
-    <link>/post/</link>
+    <link>http://wuwei.io/post/</link>
     <description>Recent content in Posts on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://wuwei.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>GSoC&#39;18: Overview</title>
-      <link>/post/2018/05/gsoc18-overview/</link>
+      <link>http://wuwei.io/post/2018/05/gsoc18-overview/</link>
       <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/05/gsoc18-overview/</guid>
+      <guid>http://wuwei.io/post/2018/05/gsoc18-overview/</guid>
       <description>Projects of GSoC&amp;rsquo;18 were announced last week and I am happy that I will be working on Shogun over this summer. In this post, I am pleased to share some details of my project.
 Shogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C++ and providing interface in different languages via SWIG, it is a great place to hack.
 My project, Continuous Detoxification, will focus on redesigning and refactoring, aiming at modernizing Shogun&amp;rsquo;s codebase and improving experience for both users and developers.</description>

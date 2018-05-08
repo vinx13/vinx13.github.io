@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Wuwei Lin</title>
-    <link>/tags/</link>
+    <link>http://wuwei.io/tags/</link>
     <description>Recent content in Tags on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://wuwei.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>GSoC</title>
-      <link>/tags/gsoc/</link>
+      <link>http://wuwei.io/tags/gsoc/</link>
       <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/gsoc/</guid>
+      <guid>http://wuwei.io/tags/gsoc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Shogun</title>
-      <link>/tags/shogun/</link>
+      <link>http://wuwei.io/tags/shogun/</link>
       <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/shogun/</guid>
+      <guid>http://wuwei.io/tags/shogun/</guid>
       <description></description>
     </item>
     
