@@ -6,10 +6,21 @@
     <description>Recent content in GSoC on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://wuwei.io/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New Transformers in Shogun</title>
+      <link>http://wuwei.io/post/2018/05/new-transformers-in-shogun/</link>
+      <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://wuwei.io/post/2018/05/new-transformers-in-shogun/</guid>
+      <description>The first two weeks of GSoC have ended. Here I will share my progress so far.
+In the first two weeks, I have been mostly working on the new transformer class, CTransformer. It is introduced mainly for two purposes: 1) Providing generic and unified interface for data transformation. 2) Make features immutable.
+In Shogun, we have preprocessors and converters, both operating on features and applying some transformations. The major distinction between them I think is that preprocessors support on-the-fly evaluation: we can add several preprocessors by add_preprocessor and then apply them when calling get_feature_vector.</description>
+    </item>
     
     <item>
       <title>GSoC&#39;18: Overview</title>
