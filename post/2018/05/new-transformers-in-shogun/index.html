@@ -57,7 +57,7 @@ In Shogun, we have preprocessors and converters, both operating on features and 
     "datePublished": "2018-05-27 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-05-27 00:00:00 &#43;0000 UTC",
     "url" : "http://wuwei.io/post/2018/05/new-transformers-in-shogun/",
-    "wordCount" : "441",
+    "wordCount" : "438",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
 </script>
@@ -104,14 +104,14 @@ In Shogun, we have preprocessors and converters, both operating on features and 
 
 <p>In apply, it takes some features as input, performs the transformation and returns the result feature which is a brand new <code>CFeatures</code> instance. The reason that a new CFeatures is always created is exactly that features are (or should be) immutable. This is also the first step of refactoring towards immutable features. On the other hand, efficient transformers are desirable. It would be disappointing if we need to copy data again and again. Hopefully, most transformers support in-place mode. In this situation, although new features are created, the underlying data (e.g matrix, string list) are shared, which minimizes the overhead for immutable features.</p>
 
-<p>The implementation is actually very tricky to support the in-place option. For example, in the <code>DensePreprocessor</code> case, we obtain the feature matrix and possibly create a clone if not in-place. After performing transformation on the matrix (we have <code>apply_to_matrix</code> implemented in every subclass of <code>DensePreprocessor</code>, we create a new <code>DenseFeatures</code> instance with the existing feature matrix and then unref the input features. Actually the ref counting here has brought me much trouble and I have wasted much time of Week 2 here :)</p>
+<p>The implementation is actually very tricky to support the in-place option. For example, in the <code>DensePreprocessor</code> case, we obtain the feature matrix and possibly create a clone if not in-place. After performing transformation on the matrix (we have <code>apply_to_matrix</code> implemented in every subclass of <code>DensePreprocessor</code>, we create a new <code>DenseFeatures</code> instance with the existing feature matrix and then unref the input features. Unfortunately the ref counting here has brought me much trouble and I have wasted much time here :)</p>
 
 <h3 id="a-brief-summary-of-pr">A brief summary of PR</h3>
 
 <ul>
 <li><p><a href="https://github.com/shogun-toolbox/shogun/pull/4290">#4290</a>
 <a href="https://github.com/shogun-toolbox/shogun/pull/4295">#4295</a> :
-We can use <code>variant</code> in Shogun. Based on whether c++17 is available, it will choose either std::variant or mpark::variant/</p></li>
+We can use <code>variant</code> in Shogun. Based on whether c++17 is available, it will choose either std::variant or mpark::variant</p></li>
 
 <li><p><a href="https://github.com/shogun-toolbox/shogun/pull/4292">#4292</a>
 <a href="https://github.com/shogun-toolbox/shogun/pull/4302">#4302</a>:
