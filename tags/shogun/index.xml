@@ -29,8 +29,7 @@ In Shogun, we have preprocessors and converters, both operating on features and 
       
       <guid>http://wuwei.io/post/2018/05/gsoc18-overview/</guid>
       <description>Projects of GSoC&amp;rsquo;18 were announced last week and I am happy that I will be working on Shogun over this summer. In this post, I am pleased to share some details of my project.
-Shogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C++ and providing interface in different languages via SWIG, it is a great place to hack.
-My project, Continuous Detoxification, will focus on redesigning and refactoring, aiming at modernizing Shogun&amp;rsquo;s codebase and improving experience for both users and developers.</description>
+Shogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C++ and providing interface in different languages via SWIG, it is a great place to hack.</description>
     </item>
     
   </channel>
