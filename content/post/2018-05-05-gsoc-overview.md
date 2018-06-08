@@ -16,3 +16,30 @@ Un-templated matrix and vector are another part, meaning that we will have Matri
 
 To share more details about my project with wider audience outside the community, I will keep myself updated in the following weeks here in this blog as we go on.
 
+
+### Timeline
+
+Week1 - Week2 : Transformer         
+Week3 - Week4 : Pipeline            
+Week4 - Week6 : Untemplated linalg
+
+### Summary of PR
+
+Transformer 
+[#4285](https://github.com/shogun-toolbox/shogun/pull/4285)
+[#4316](https://github.com/shogun-toolbox/shogun/pull/4316)
+[#4326](https://github.com/shogun-toolbox/shogun/pull/4326)
+
+Variant
+[#4290](https://github.com/shogun-toolbox/shogun/pull/4290)
+[#4295](https://github.com/shogun-toolbox/shogun/pull/4295)
+
+Notebook
+[#4269](https://github.com/shogun-toolbox/shogun/pull/4269)
+[#4273](https://github.com/shogun-toolbox/shogun/pull/4273)
+[#4292](https://github.com/shogun-toolbox/shogun/pull/4292)
+[#4302](https://github.com/shogun-toolbox/shogun/pull/4302)
+
+Meta Examples
+[#4318](https://github.com/shogun-toolbox/shogun/pull/4318)
+[#4325](https://github.com/shogun-toolbox/shogun/pull/4325)
