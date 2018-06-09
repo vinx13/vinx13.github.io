@@ -6,10 +6,20 @@
     <description>Recent content in Home on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://wuwei.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Some thoughts on linalg</title>
+      <link>http://wuwei.io/post/2018/06/some-thoughts-on-linalg/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://wuwei.io/post/2018/06/some-thoughts-on-linalg/</guid>
+      <description>So in the next two weeks I&amp;rsquo;m going to work on refactoring linalg of Shogun. The data types in Shogun, SGVector&amp;lt;T&amp;gt;, SGMatrix&amp;lt;T&amp;gt; are templated classes which maintain a piece of memory in either CPU or GPU and provide basic operations like array-like element access. linalg::, is the upper level module working with SGVector, SGMatrix, providing linalg algebra operations, like matrix additions / multiplications.
+Though SGVector and SGMatrix, as template classes, are capable to represent different data types (float32_t, float64_t, etc.</description>
+    </item>
     
     <item>
       <title>New Transformers in Shogun</title>
