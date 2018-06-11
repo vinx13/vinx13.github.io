@@ -30,6 +30,9 @@ Transformer
 [#4316](https://github.com/shogun-toolbox/shogun/pull/4316)
 [#4326](https://github.com/shogun-toolbox/shogun/pull/4326)
 
+Pipeline
+[#4317](https://github.com/shogun-toolbox/shogun/pull/4317)
+
 Variant
 [#4290](https://github.com/shogun-toolbox/shogun/pull/4290)
 [#4295](https://github.com/shogun-toolbox/shogun/pull/4295)
@@ -40,6 +43,11 @@ Notebook
 [#4292](https://github.com/shogun-toolbox/shogun/pull/4292)
 [#4302](https://github.com/shogun-toolbox/shogun/pull/4302)
 
+Cookbook
+[#4323](https://github.com/shogun-toolbox/shogun/pull/4323)
+
 Meta Examples
 [#4318](https://github.com/shogun-toolbox/shogun/pull/4318)
 [#4325](https://github.com/shogun-toolbox/shogun/pull/4325)
+[#4336](https://github.com/shogun-toolbox/shogun/pull/4336)
+
