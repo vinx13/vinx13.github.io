@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://wuwei.io/post/2018/06/lazy-evaluation-with-expression-templates-1/</loc>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://wuwei.io/post/2018/06/some-thoughts-on-linalg/</loc>
     <lastmod>2018-06-08T00:00:00+00:00</lastmod>
   </url>
@@ -19,30 +24,30 @@
   
   <url>
     <loc>http://wuwei.io/tags/gsoc/</loc>
-    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://wuwei.io/</loc>
-    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://wuwei.io/post/</loc>
-    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://wuwei.io/tags/shogun/</loc>
-    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://wuwei.io/tags/</loc>
-    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

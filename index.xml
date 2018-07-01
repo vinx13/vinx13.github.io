@@ -6,10 +6,20 @@
     <description>Recent content in Home on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://wuwei.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lazy Evaluation with Expression Templates (1)</title>
+      <link>http://wuwei.io/post/2018/06/lazy-evaluation-with-expression-templates-1/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://wuwei.io/post/2018/06/lazy-evaluation-with-expression-templates-1/</guid>
+      <description>In last post I talked about the ongoing rafactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type infomation in runtime. Say you have some vectors and do some computations like
+Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element types of vectors and call templated routine linalg::add&amp;lt;T&amp;gt;. In this way we will have to switch every time, over each expression involved, e.</description>
+    </item>
     
     <item>
       <title>Some thoughts on linalg</title>
