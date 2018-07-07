@@ -6,8 +6,8 @@ tags:
   - Shogun
 ---
 
-In last post I talked about the ongoing rafactor of linalg.
-So we are going to have untemplated vector and matrix types, using a void pointer and checking type infomation in runtime.
+In last post I talked about the ongoing refactor of linalg.
+So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime.
 Say you have some vectors and do some computations like
 ```cpp
 Vector a, b, c;
@@ -15,7 +15,7 @@ c = add(add(a, b), c);
 ```
 A simple idea is to switch over element types of vectors and call templated routine `linalg::add<T>`.
 In this way we will have to switch every time, over each expression involved, e.g, a, b, c and a+b.
-This is not desirable not only for runtime overhead but also much boilpolate code we will have to add.
+This is not desirable not only for runtime overhead but also much boilerplate code we will have to add.
 
 To prevent redundant big switches every time, lazy evaluation is a quite nice idea here. Let's start with a simple `Vector`:
 ```cpp
@@ -38,7 +38,7 @@ class Exp {
     const E& self() const { return *static_cast<const E*>(this); }
 }
 ```
-Note that `Exp` is a templated class since we are using CRTP pattern to support static polymophism.
+Note that `Exp` is a templated class since we are using CRTP pattern to support static polymorphism.
 
 One of the expression types we have is `VectorExp`. By `Vector` it means that it evaluates to some `Vector`. Similarly we can have `MatrixExp` and so on. Then we can derive specific types of vector expressions., for example `BinaryVectorExp` is a template class that represents some binary expressions with a custom operator.
 ```cpp
@@ -50,9 +50,9 @@ template <
     typename E1, 
     typename E2
 >
-class BinaryVectorExp: public VectorExp<BnaryVectorExp<OP, E1, E2>>;
+class BinaryVectorExp: public VectorExp<BinaryVectorExp<OP, E1, E2>>;
 ```
-Here `OP` is an operator class that defines the templated evaluation proess. For example, vector addition can be defined like:
+Here `OP` is an operator class that defines the templated evaluation process. For example, vector addition can be defined like:
 ```cpp
 struct VectorAdd {
     VectorAdd(double alpha, double beta): alpha(alpha), beta(beta) { }
@@ -95,7 +95,7 @@ auto add(Args&& args...)
     return add_impl(forward_exp<Args>(args)...);
 }
 ```
-In this example, arguments are forwared to `add_impl` and cast to `VectorRefExp` whenever `Vector` is passed by `forward_exp`.
+In this example, arguments are forwarded to `add_impl` and cast to `VectorRefExp` whenever `Vector` is passed by `forward_exp`.
 
 Now we could write down our lazy expression like:
 ```cpp
