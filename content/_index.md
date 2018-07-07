@@ -12,7 +12,7 @@ I am working for [Shogun](http://shogun.ml) this summer as a [GSoC 2018](https:/
 [GitHub](https://github.com/vinx13) / [Email](mailto:vincentl13x@gmail.com)
 
 ### Publication
-* [Recurrent Residual Module for Fast Inference in Videos](http://arxiv.org/abs/1802.09723)
+* [Recurrent Residual Module for Fast Inference in Videos](http://openaccess.thecvf.com/content_cvpr_2018/papers/Pan_Recurrent_Residual_Module_CVPR_2018_paper.pdf)
 Bowen Pan, **Wuwei Lin**, Xiaolin Fang, Chaoqin Huang, Bolei Zhou, Cewu Lu. 
 Computer Vision and Pattern Recognition (CVPR), 2018 
 
