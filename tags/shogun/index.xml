@@ -6,10 +6,21 @@
     <description>Recent content in Shogun on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://wuwei.io/tags/shogun/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lazy Evaluation with Expression Templates (2)</title>
+      <link>http://wuwei.io/post/2018/07/lazy-evaluation-with-expression-templates-2/</link>
+      <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://wuwei.io/post/2018/07/lazy-evaluation-with-expression-templates-2/</guid>
+      <description>Progress so far
+Previously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix. For example,
+Vector a, b; auto c = add(a, b); Vector d = add(a, c);  In this example we create a addition expression of a and b, and then call add with an expression and a vector. In the second add expression, the argument c, which is a Vector, will be converted to a VectorRefExp.</description>
+    </item>
     
     <item>
       <title>Lazy Evaluation with Expression Templates (1)</title>
@@ -17,7 +28,7 @@
       <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://wuwei.io/post/2018/06/lazy-evaluation-with-expression-templates-1/</guid>
-      <description>In last post I talked about the ongoing rafactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type infomation in runtime. Say you have some vectors and do some computations like
+      <description>In last post I talked about the ongoing refactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime. Say you have some vectors and do some computations like
 Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element types of vectors and call templated routine linalg::add&amp;lt;T&amp;gt;. In this way we will have to switch every time, over each expression involved, e.</description>
     </item>
     

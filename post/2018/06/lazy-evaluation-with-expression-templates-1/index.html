@@ -44,7 +44,7 @@
     "articleSection" : "post",
     "name" : "Lazy Evaluation with Expression Templates (1)",
     "headline" : "Lazy Evaluation with Expression Templates (1)",
-    "description" : "In last post I talked about the ongoing rafactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type infomation in runtime. Say you have some vectors and do some computations like
+    "description" : "In last post I talked about the ongoing refactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime. Say you have some vectors and do some computations like
 Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element types of vectors and call templated routine linalg::add&lt;T&gt;. In this way we will have to switch every time, over each expression involved, e.",
     "inLanguage" : "en-US",
     "author" : "Wuwei Lin",
@@ -86,8 +86,8 @@ Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element 
 
 
 <main>
-<p>In last post I talked about the ongoing rafactor of linalg.
-So we are going to have untemplated vector and matrix types, using a void pointer and checking type infomation in runtime.
+<p>In last post I talked about the ongoing refactor of linalg.
+So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime.
 Say you have some vectors and do some computations like</p>
 
 <pre><code class="language-cpp">Vector a, b, c;
@@ -96,7 +96,7 @@ c = add(add(a, b), c);
 
 <p>A simple idea is to switch over element types of vectors and call templated routine <code>linalg::add&lt;T&gt;</code>.
 In this way we will have to switch every time, over each expression involved, e.g, a, b, c and a+b.
-This is not desirable not only for runtime overhead but also much boilpolate code we will have to add.</p>
+This is not desirable not only for runtime overhead but also much boilerplate code we will have to add.</p>
 
 <p>To prevent redundant big switches every time, lazy evaluation is a quite nice idea here. Let&rsquo;s start with a simple <code>Vector</code>:</p>
 
@@ -121,7 +121,7 @@ class Exp {
 }
 </code></pre>
 
-<p>Note that <code>Exp</code> is a templated class since we are using CRTP pattern to support static polymophism.</p>
+<p>Note that <code>Exp</code> is a templated class since we are using CRTP pattern to support static polymorphism.</p>
 
 <p>One of the expression types we have is <code>VectorExp</code>. By <code>Vector</code> it means that it evaluates to some <code>Vector</code>. Similarly we can have <code>MatrixExp</code> and so on. Then we can derive specific types of vector expressions., for example <code>BinaryVectorExp</code> is a template class that represents some binary expressions with a custom operator.</p>
 
@@ -133,10 +133,10 @@ template &lt;
     typename E1, 
     typename E2
 &gt;
-class BinaryVectorExp: public VectorExp&lt;BnaryVectorExp&lt;OP, E1, E2&gt;&gt;;
+class BinaryVectorExp: public VectorExp&lt;BinaryVectorExp&lt;OP, E1, E2&gt;&gt;;
 </code></pre>
 
-<p>Here <code>OP</code> is an operator class that defines the templated evaluation proess. For example, vector addition can be defined like:</p>
+<p>Here <code>OP</code> is an operator class that defines the templated evaluation process. For example, vector addition can be defined like:</p>
 
 <pre><code class="language-cpp">struct VectorAdd {
     VectorAdd(double alpha, double beta): alpha(alpha), beta(beta) { }
@@ -180,7 +180,7 @@ auto add(Args&amp;&amp; args...)
 }
 </code></pre>
 
-<p>In this example, arguments are forwared to <code>add_impl</code> and cast to <code>VectorRefExp</code> whenever <code>Vector</code> is passed by <code>forward_exp</code>.</p>
+<p>In this example, arguments are forwarded to <code>add_impl</code> and cast to <code>VectorRefExp</code> whenever <code>Vector</code> is passed by <code>forward_exp</code>.</p>
 
 <p>Now we could write down our lazy expression like:</p>
 
