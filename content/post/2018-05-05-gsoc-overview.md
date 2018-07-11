@@ -29,6 +29,8 @@ Transformer
 [#4285](https://github.com/shogun-toolbox/shogun/pull/4285)
 [#4316](https://github.com/shogun-toolbox/shogun/pull/4316)
 [#4326](https://github.com/shogun-toolbox/shogun/pull/4326)
+[#4339](https://github.com/shogun-toolbox/shogun/pull/4339)
+[#4348](https://github.com/shogun-toolbox/shogun/pull/4348)
 
 Pipeline
 [#4317](https://github.com/shogun-toolbox/shogun/pull/4317)
@@ -50,4 +52,13 @@ Meta Examples
 [#4318](https://github.com/shogun-toolbox/shogun/pull/4318)
 [#4325](https://github.com/shogun-toolbox/shogun/pull/4325)
 [#4336](https://github.com/shogun-toolbox/shogun/pull/4336)
+[#4338](https://github.com/shogun-toolbox/shogun/pull/4338)
+[#4349](https://github.com/shogun-toolbox/shogun/pull/4349)
+[#4361](https://github.com/shogun-toolbox/shogun/pull/4361)
 
+Immutable Features
+[#4352](https://github.com/shogun-toolbox/shogun/pull/4352)
+[#4365](https://github.com/shogun-toolbox/shogun/pull/4365)
+
+Features Factory
+[#4345](https://github.com/shogun-toolbox/shogun/pull/4345)
