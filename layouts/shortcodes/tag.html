@@ -1,0 +1,9 @@
+<ul class="term">
+    {{ range .Site.Taxonomies.tags.Get (.Get 0) }}
+    <li>
+        <a href="{{.RelPermalink}}">
+            {{.Title}}
+        </a>
+    </li>
+    {{ end }}
+</ul>
