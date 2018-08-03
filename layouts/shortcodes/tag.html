@@ -1,5 +1,5 @@
 <ul class="term">
-    {{ range .Site.Taxonomies.tags.Get (.Get 0) }}
+    {{ range sort (.Site.Taxonomies.tags.Get (.Get 0)) "Date" }}
     <li>
         <a href="{{.RelPermalink}}">
             {{.Title}}
