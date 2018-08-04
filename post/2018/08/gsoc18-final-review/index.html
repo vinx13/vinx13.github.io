@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GSoC&#39;18: Final Review | Wuwei Lin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="http://wuwei.io/css/theme-override.css">
+    <header>
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <nav>
+    <ul>
+      
+      
+      
+      
+      <li class="pull-left ">
+        <a href="/">home</a>
+      </li>
+      
+
+      
+      
+      <li class="pull-right">
+        <a href="/index.xml">subscribe</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "http://wuwei.io/"
+    },
+    "articleSection" : "post",
+    "name" : "GSoC&#39;18: Final Review",
+    "headline" : "GSoC&#39;18: Final Review",
+    "description" : "We are near the end of GSoC this year. It has been a really successful and exciting summer. New features have been added to Shogun. Besides, we have get lots of old things cleaned up and improved. This post is the final review of the project.
+My work during this summer mainly has two parts: immutable features and untemplated linalg. The former one is consisted of a series of refactor and redesign towards immutable features, including transformer and pipeline, dropping non-const methods from features.",
+    "inLanguage" : "en-US",
+    "author" : "Wuwei Lin",
+    "creator" : "Wuwei Lin",
+    "publisher": "Wuwei Lin",
+    "accountablePerson" : "Wuwei Lin",
+    "copyrightHolder" : "Wuwei Lin",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-08-03 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2018-08-03 00:00:00 &#43;0000 UTC",
+    "url" : "http://wuwei.io/post/2018/08/gsoc18-final-review/",
+    "wordCount" : "970",
+    "keywords" : [ "GSoC","Shogun","Blog" ]
+}
+</script>
+
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">GSoC&#39;18: Final Review</span></h1>
+
+<h2 class="date">2018/08/03</h2>
+<p class="terms">
+  
+  
+  
+  
+  Tags: <a href="/tags/gsoc">GSoC</a> <a href="/tags/shogun">Shogun</a> 
+  
+  
+</p>
+</div>
+
+
+
+<main>
+
+
+<p>We are near the end of GSoC this year.
+It has been a really successful and exciting summer.
+New features have been added to Shogun.
+Besides, we have get lots of old things cleaned up and improved.
+This post is the final review of the project.</p>
+
+<p>My work during this summer mainly has two parts: immutable features and untemplated linalg. The former one is consisted of a series of refactor and redesign towards immutable features, including transformer and pipeline, dropping non-const methods from features. The topic about untemplated linalg is to drop the type argument <code>T</code> from <code>SGMatrix&lt;T&gt;</code> and <code>SGVector&lt;T&gt;</code> and put the type information in runtime.</p>
+
+<h4 id="transformer">Transformer</h4>
+
+<p>The new transformer class is a combination of preprocessors and converters that provides a unified interface for features transformations.
+It supports standard <code>fit</code> + <code>transform</code> interface.
+Plus, it can also work in in-place mode that operate on the same features instance and prevents unnecessary copy.</p>
+
+<p>With the new transformer interface, I removed old preprocessor APIs from features. Previously preprocessor functionality is mixed up in features.
+For example, it maintains states of preprocessors added.
+<code>apply_preprocessor</code> mutates data of features is removed this is equivalent to the in-place mode of transformers.
+Removing them makes features much cleaner.</p>
+
+<h4 id="pipeline">Pipeline</h4>
+
+<p>Pipeline is a machine that chains multiple transformers and machines.
+It consists of a sequence of transformers as intermediate stages of training or testing and a machine as the final stage.
+Features are transformed by transformers and fed into the next stage sequentially.</p>
+
+<p>The pipeline instance is built using the <code>with</code> and <code>over</code> in PipelineBuilder.
+We use <code>with</code> to add transformers and then finalize with a machine passed to <code>over</code>, which returns a <code>Pipeline</code> instance.
+As <code>Pipeline</code> inherits directly from <code>Machine</code>, we can use it in exactly the same way as machines.
+This means that it supports the <code>train</code> and <code>machine</code> interface and we can also use it in cross validation.</p>
+
+<p>Internally stages are <name, pointer> pairs, where pointers are <code>CTransformer*</code> or <code>CMachine*</code> stored in <code>variant</code>.
+Since <code>variant</code> is available since C++17, I also introduced a C++11 compatible <code>variant</code> library to Shogun.</p>
+
+<h4 id="custom-exception-type">Custom Exception type</h4>
+
+<p>Previously, <code>ShogunException</code> is thrown whenever an assertion fails or <code>SG_ERROR</code> is explicitly called.
+This error handling way is not optimal because the exception type does not provide any additional information.
+Users have to read the error message to figure out what the error is, which is not friendly to automated tests.
+New macros <code>REQUIRE_E</code>, <code>SG_THROW</code> are introduced that support custom exception type.
+They work basically in a similar way with <code>REQUIRE</code> and <code>SG_ERROR</code>, except that they both accept one extra argument to specify the type of the exception to throw.</p>
+
+<h4 id="features-and-labels-view">Features and Labels View</h4>
+
+<p>The template function <code>view</code> is added to a new instance of features or labels that shares a subset of data.
+Previously when we need to operate on a subset of data, we directly call <code>add_subset</code> and then <code>remove_subset</code>, which makes features and labels mutable.
+<code>view</code> creates a shadow copy instead. This is a cool thing that we can make features immutable while still don&rsquo;t need to waste time copying data.
+Also, the non-const subset APIs can be hidden from public interface of features.</p>
+
+<h4 id="string-features-factory">String Features Factory</h4>
+
+<p>Two factories of string features are added.
+This makes it possible to create string features and string embedding features from SWIG interface so that we can continue porting more Python examples to the meta example system.
+<code>string_features</code> is similar to the factory for dense features. It creates string features from files.
+A overloading method of <code>string_features</code> accepts string features and extra parameters for embedding provides facility for mapping string features to high order representation.</p>
+
+<h4 id="untemplated-linalg">Untemplated linalg</h4>
+
+<p>Making linalg untemplated is to store data in a void pointer and put the type information in runtime.
+When we are using untemplated data, such as Vector and Matrix, we have to check the type, which is a enumeration value, and do the switch.
+This way is not very effective since we will have to do this again and again.
+Therefore, based on the PR last year, I implemented lazy evaluation with expression templates.
+Now, multiple operations, for example an addition and a multiplication, can be chained and then evaluated at once.
+And we only need to check the type information once.
+More details can be found in my previous posts.</p>
+
+<h4 id="the-story">The Story</h4>
+
+<p>Shogun is my first open source participation.
+When I was been seeking for open source opportunity, I came across with Shogun and started coding.
+Not only for my interests on machine learning but also for that Shogun is super friendly to newcomers (Special thanks to Heiko who helped me greatly during my initial involvement :), I found out that Shogun is the best place for me and later I took part in the GSoC program.</p>
+
+<p>The most exciting and challenging part is to come up with my own design and then implement it, get it merged to the codebase.
+Even if we have initial design through discussions, much effort is necessary to elaborate and polish it.</p>
+
+<p>Anyway, what is really important is to be active and creative. Always be ready to communicate, and always write down the code and try it out whenever you have an interesting idea. This makes your coding process much enjoyable and you will find out that it is easier that you thought.</p>
+
+<p>There are still many things in Shogun to improve.
+For example, we still need significant refactor on machines and features to make features immutable and finally support better cross validation.
+I&rsquo;m hoping to continue my contributions to Shogun after GSoC because I&rsquo;m pretty happy with the journey so far :)
+For perspective GSoC students, I&rsquo;m also looking for your contributions.</p>
+
+<p>Finally, I would like to thank my mentors Viktor and Heiko, and all the helpful people in the community, who made this GSoC so successful and exciting.</p>
+
+</main>
+
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-90229954-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+      
+      <hr/>
+      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      
+    </footer>
+  </body>
+</html>
+

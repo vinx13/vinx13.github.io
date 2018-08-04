@@ -6,10 +6,40 @@
     <description>Recent content in GSoC on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://wuwei.io/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GSoC&#39;18: Final Review</title>
+      <link>http://wuwei.io/post/2018/08/gsoc18-final-review/</link>
+      <pubDate>Fri, 03 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://wuwei.io/post/2018/08/gsoc18-final-review/</guid>
+      <description>We are near the end of GSoC this year. It has been a really successful and exciting summer. New features have been added to Shogun. Besides, we have get lots of old things cleaned up and improved. This post is the final review of the project.
+My work during this summer mainly has two parts: immutable features and untemplated linalg. The former one is consisted of a series of refactor and redesign towards immutable features, including transformer and pipeline, dropping non-const methods from features.</description>
+    </item>
+    
+    <item>
+      <title>GSoC&#39;18: Summary Page</title>
+      <link>http://wuwei.io/post/2018/08/gsoc18-summary-page/</link>
+      <pubDate>Fri, 03 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://wuwei.io/post/2018/08/gsoc18-summary-page/</guid>
+      <description>This is summary of the Google Summer of Code Project with Shogun.
+Pull Requests Transformer #4285 #4326 #4339 #4348 #4367
+Pipeline #4317 #4377
+Variant #4290 #4295
+Immutable Features #4316 #4339 #4352 #4365 #4376
+Features and Labels View #4352
+Custom Exception #4331
+Notebook #4269 #4273 #4292 #4302
+Cookbook #4323 #4338 #4366 #4380 #4390
+Meta Examples #4318 #4325 #4336 #4338 #4349 #4361
+Features Factory #4345 #4375
+Demo of Untemplated Linalg GitHub repo</description>
+    </item>
     
     <item>
       <title>Bringing features and labels views to Shogun</title>
@@ -69,7 +99,8 @@ In Shogun, we have preprocessors and converters, both operating on features and 
       
       <guid>http://wuwei.io/post/2018/05/gsoc18-overview/</guid>
       <description>Projects of GSoC&amp;rsquo;18 were announced last week and I am happy that I will be working on Shogun over this summer. In this post, I am pleased to share some details of my project.
-Shogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C++ and providing interface in different languages via SWIG, it is a great place to hack.</description>
+Shogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C++ and providing interface in different languages via SWIG, it is a great place to hack.
+My project, Continuous Detoxification, will focus on redesigning and refactoring, aiming at modernizing Shogun&amp;rsquo;s codebase and improving experience for both users and developers.</description>
     </item>
     
   </channel>
