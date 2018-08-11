@@ -23,6 +23,10 @@ For example, it maintains states of preprocessors added.
 `apply_preprocessor` mutates data of features is removed this is equivalent to the in-place mode of transformers.
 Removing them makes features much cleaner.
 
+`inverse_transform` is a new feature to Shogun.
+There are some transformers that are possible to support this feature, for example, `ICAConverter`, `LogPlusOne`.
+The inverse mode of these transformers are easy to implement. The future work will be implementing inverse mode for these transformers.
+
 #### Pipeline
 Pipeline is a machine that chains multiple transformers and machines.
 It consists of a sequence of transformers as intermediate stages of training or testing and a machine as the final stage.
@@ -42,6 +46,7 @@ This error handling way is not optimal because the exception type does not provi
 Users have to read the error message to figure out what the error is, which is not friendly to automated tests.
 New macros `REQUIRE_E`, `SG_THROW` are introduced that support custom exception type.
 They work basically in a similar way with `REQUIRE` and `SG_ERROR`, except that they both accept one extra argument to specify the type of the exception to throw.
+Using these macros to throw proper exceptions all over Shogun would be a good idea for future work.
 
 #### Features and Labels View
 The template function `view` is added to a new instance of features or labels that shares a subset of data.
@@ -55,14 +60,16 @@ This makes it possible to create string features and string embedding features f
 `string_features` is similar to the factory for dense features. It creates string features from files.
 A overloading method of `string_features` accepts string features and extra parameters for embedding provides facility for mapping string features to high order representation.
 
-#### Untemplated linalg
+#### Untemplated Linalg
 Making linalg untemplated is to store data in a void pointer and put the type information in runtime.
 When we are using untemplated data, such as Vector and Matrix, we have to check the type, which is a enumeration value, and do the switch.
 This way is not very effective since we will have to do this again and again.
 Therefore, based on the PR last year, I implemented lazy evaluation with expression templates.
 Now, multiple operations, for example an addition and a multiplication, can be chained and then evaluated at once.
 And we only need to check the type information once.
-More details can be found in my previous posts. 
+This prototype still need improvement.
+More details can be found in my previous posts.
+In the future, we can continue from this prototype and finally use it in Shogun.
 
 #### The Story  
 Shogun is my first open source participation. 
