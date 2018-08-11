@@ -56,7 +56,7 @@ My work during this summer mainly has two parts: immutable features and untempla
     "datePublished": "2018-08-03 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-08-03 00:00:00 &#43;0000 UTC",
     "url" : "http://wuwei.io/post/2018/08/gsoc18-final-review/",
-    "wordCount" : "970",
+    "wordCount" : "1051",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
 </script>
@@ -107,6 +107,10 @@ For example, it maintains states of preprocessors added.
 <code>apply_preprocessor</code> mutates data of features is removed this is equivalent to the in-place mode of transformers.
 Removing them makes features much cleaner.</p>
 
+<p><code>inverse_transform</code> is a new feature to Shogun.
+There are some transformers that are possible to support this feature, for example, <code>ICAConverter</code>, <code>LogPlusOne</code>.
+The inverse mode of these transformers are easy to implement. The future work will be implementing inverse mode for these transformers.</p>
+
 <h4 id="pipeline">Pipeline</h4>
 
 <p>Pipeline is a machine that chains multiple transformers and machines.
@@ -127,7 +131,8 @@ Since <code>variant</code> is available since C++17, I also introduced a C++11 c
 This error handling way is not optimal because the exception type does not provide any additional information.
 Users have to read the error message to figure out what the error is, which is not friendly to automated tests.
 New macros <code>REQUIRE_E</code>, <code>SG_THROW</code> are introduced that support custom exception type.
-They work basically in a similar way with <code>REQUIRE</code> and <code>SG_ERROR</code>, except that they both accept one extra argument to specify the type of the exception to throw.</p>
+They work basically in a similar way with <code>REQUIRE</code> and <code>SG_ERROR</code>, except that they both accept one extra argument to specify the type of the exception to throw.
+Using these macros to throw proper exceptions all over Shogun would be a good idea for future work.</p>
 
 <h4 id="features-and-labels-view">Features and Labels View</h4>
 
@@ -143,7 +148,7 @@ This makes it possible to create string features and string embedding features f
 <code>string_features</code> is similar to the factory for dense features. It creates string features from files.
 A overloading method of <code>string_features</code> accepts string features and extra parameters for embedding provides facility for mapping string features to high order representation.</p>
 
-<h4 id="untemplated-linalg">Untemplated linalg</h4>
+<h4 id="untemplated-linalg">Untemplated Linalg</h4>
 
 <p>Making linalg untemplated is to store data in a void pointer and put the type information in runtime.
 When we are using untemplated data, such as Vector and Matrix, we have to check the type, which is a enumeration value, and do the switch.
@@ -151,7 +156,9 @@ This way is not very effective since we will have to do this again and again.
 Therefore, based on the PR last year, I implemented lazy evaluation with expression templates.
 Now, multiple operations, for example an addition and a multiplication, can be chained and then evaluated at once.
 And we only need to check the type information once.
-More details can be found in my previous posts.</p>
+This prototype still need improvement.
+More details can be found in my previous posts.
+In the future, we can continue from this prototype and finally use it in Shogun.</p>
 
 <h4 id="the-story">The Story</h4>
 
