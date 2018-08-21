@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GSoC&#39;18: Peer Review for Inside the Black Box | Wuwei Lin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <nav>
+    <ul>
+      
+      
+      
+      
+      <li class="pull-left ">
+        <a href="/">home</a>
+      </li>
+      
+
+      
+      
+      <li class="pull-right">
+        <a href="/index.xml">subscribe</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "http://wuwei.io/"
+    },
+    "articleSection" : "post",
+    "name" : "GSoC&#39;18: Peer Review for Inside the Black Box",
+    "headline" : "GSoC&#39;18: Peer Review for Inside the Black Box",
+    "description" : "This is my review for Shubham’s project, Inside the Black Box (project page, final report) this summer. His work covers some important topics about user experience and internal implementation of Shogun.
+Main Idea StoppableSGObject extends the premature stopping machine last year. The macro COMPUTATIONS_CONTROLLERS makes it possible to respond to signals during training. This a helpful since we user can interrupt the training and then possibly resume. Moving these things to the base class StoppableSGObject makes CMachine class much cleaner.",
+    "inLanguage" : "en-US",
+    "author" : "Wuwei Lin",
+    "creator" : "Wuwei Lin",
+    "publisher": "Wuwei Lin",
+    "accountablePerson" : "Wuwei Lin",
+    "copyrightHolder" : "Wuwei Lin",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-08-15 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2018-08-15 00:00:00 &#43;0000 UTC",
+    "url" : "http://wuwei.io/post/2018/08/gsoc18-peer-review-for-inside-the-black-box/",
+    "wordCount" : "537",
+    "keywords" : [ "GSoC","Shogun","Blog" ]
+}
+</script>
+
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">GSoC&#39;18: Peer Review for Inside the Black Box</span></h1>
+
+<h2 class="date">2018/08/15</h2>
+<p class="terms">
+  
+  
+  
+  
+  Tags: <a href="/tags/gsoc">GSoC</a> <a href="/tags/shogun">Shogun</a> 
+  
+  
+</p>
+</div>
+
+
+
+<main>
+
+
+<p>This is my review for Shubham’s project, Inside the Black Box (<a href="https://summerofcode.withgoogle.com/projects/6010966421012480">project page</a>, <a href="https://shubham808.github.io/blog/gsoc'18/Final-Report">final report</a>) this summer.
+His work covers some important topics about user experience and internal implementation of Shogun.</p>
+
+<h4 id="main-idea">Main Idea</h4>
+
+<p><a href="https://github.com/shogun-toolbox/shogun/blob/develop/src/shogun/lib/StoppableSGObject.h"><code>StoppableSGObject</code></a> extends the premature stopping machine last year.
+The macro <a href="https://github.com/shogun-toolbox/shogun/blob/41888fe7c8dc3797063d674f452e13351f321338/src/shogun/lib/StoppableSGObject.h#L18"><code>COMPUTATIONS_CONTROLLERS</code></a> makes it possible to respond to <a href="https://github.com/shogun-toolbox/shogun/blob/41888fe7c8dc3797063d674f452e13351f321338/src/shogun/lib/StoppableSGObject.cpp#L24">signals</a> during training.
+This a helpful since we user can interrupt the training and then possibly resume. Moving these things to the base class <code>StoppableSGObject</code> makes <code>CMachine</code> class much cleaner.
+The new macro <code>SG_PROGRESS</code> is very nice. It makes progress bar more informative while requires few <a href="https://github.com/shogun-toolbox/shogun/pull/4305/files">changes</a>.
+To add a prefix like <code>class_name::method_name</code> to the progress bar, we only need to replace <code>progress</code> with the macro <code>SG_PROGRESS</code>.</p>
+
+<p>I like the <a href="https://github.com/shogun-toolbox/shogun/blob/develop/src/shogun/machine/IterativeMachine.h"><code>IterativeMachine</code></a> interface.
+It allows us to take control of iterations during computation.
+Also, we are able to test against reference result during iterations.
+For example, we can pause training every five iterations and test the model parameter against the reference and the resume training.
+This would be a good future work idea. The implementation of IterativeMachine class looks very clean and nice.
+IterativeMachine is a <a href="https://en.wikipedia.org/wiki/Mixin">mixin</a> class (i.e. <code>template &lt;T&gt; class IterativeMachine: public T</code>). I would like to see some explanation on making T a base class here.</p>
+
+<p>Feature type dispatching utilizes the <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">CRTP</a> pattern to remove <a href="https://github.com/shogun-toolbox/shogun/blob/18cf07f5c4b533a03f438202bbd8fa33f2c91301/src/shogun/classifier/LDA.cpp#L79">the redundant code</a> for type switch and dispatching to templated method call.
+It is clear and easy to follow so that others can port other algorithms to this pattern.
+I think it would be good to mention the changes to <a href="https://github.com/shogun-toolbox/shogun/blob/41888fe7c8dc3797063d674f452e13351f321338/src/shogun/machine/Machine.cpp#L60"><code>CMachine</code> class</a> in the blog post.
+In <a href="https://github.com/shogun-toolbox/shogun/blob/41888fe7c8dc3797063d674f452e13351f321338/src/shogun/classifier/LDA.cpp#L62"><code>train_machine_templated</code></a>, it returns a boolean to indicate whether the feature type is supported.
+I think we could also throw an exception here.
+But since currently <code>train_machine</code> should return false it training is not successful, this is consistent with the CMachine api.
+Using feature type dispatch allows us to support more primitive types other than float64, however if we port them to templated version, I am curious about the overhead of binary size and compilation time due to template instantiation.</p>
+
+<h4 id="conclusion">Conclusion</h4>
+
+<p>Overall, Shubham has done a great set of work.
+These features help improve user experience and makes Shogun more flexible and versatile.
+Besides, the future work mentioned is very helpful for others who would like to continue this work.
+I am very excited to see these new features added.</p>
+
+<h4 id="response-for-shubham-s-review">Response for Shubham&rsquo;s review</h4>
+
+<p>API like</p>
+
+<pre><code>p.over(&quot;submean&quot;, transformer(&quot;PruneVarSubMean&quot;)).then(&quot;kmeans&quot;, machine(&quot;KMeans&quot;))
+</code></pre>
+
+<p>is possible in Python and other interface.
+This is currently not possible in meta examples because of the limit of the translator.
+It would be good to support it in the future.</p>
+
+<p>Using custom exception and the macros <code>SG_THROW</code> and <code>REQUIRE_E</code> all over Shogun is a very nice idea for future work.</p>
+
+<p>In untemplated linalg, implicitly evaluation happens when you assign an expression to a vector or a matrix.
+In this example, we declared the result type using <code>auto</code>, which means that we will save the result of <code>add</code>, an expression, to the result variable and the expression will be lazily evaluated.
+If we use <code>Vector</code> instead of <code>auto</code>, implicitly evaluation will happen immediately.</p>
+
+<p>Thanks for the suggestion about listing future work.
+I agree that this is important to help others to follow my work.</p>
+
+</main>
+
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-90229954-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+      
+      <hr/>
+      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      
+    </footer>
+  </body>
+</html>
+

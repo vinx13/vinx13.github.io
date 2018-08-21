@@ -6,10 +6,20 @@
     <description>Recent content in Shogun on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://wuwei.io/tags/shogun/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GSoC&#39;18: Peer Review for Inside the Black Box</title>
+      <link>http://wuwei.io/post/2018/08/gsoc18-peer-review-for-inside-the-black-box/</link>
+      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://wuwei.io/post/2018/08/gsoc18-peer-review-for-inside-the-black-box/</guid>
+      <description>This is my review for Shubham’s project, Inside the Black Box (project page, final report) this summer. His work covers some important topics about user experience and internal implementation of Shogun.
+Main Idea StoppableSGObject extends the premature stopping machine last year. The macro COMPUTATIONS_CONTROLLERS makes it possible to respond to signals during training. This a helpful since we user can interrupt the training and then possibly resume. Moving these things to the base class StoppableSGObject makes CMachine class much cleaner.</description>
+    </item>
     
     <item>
       <title>GSoC&#39;18: Final Review</title>
