@@ -4,7 +4,12 @@ date: 2018-08-03
 tags:
   - GSoC
   - Shogun
+resources:
+  - name: logo
+    src: "img/GSoC - Vertical Narrow - Gray Text - White BG.png"
 ---
+<img style="float:right; padding: 5px 5px;" src="/img/GSoC-logo-horizontal-800.png" width="450">
+
 We are near the end of GSoC this year.
 It has been a really successful and exciting summer.
 New features have been added to Shogun.
