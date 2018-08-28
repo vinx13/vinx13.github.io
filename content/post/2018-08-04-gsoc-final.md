@@ -13,6 +13,19 @@ This post is the final review of the project.
 
 My work during this summer mainly has two parts: immutable features and untemplated linalg. The former one is consisted of a series of refactor and redesign towards immutable features, including transformer and pipeline, dropping non-const methods from features. The topic about untemplated linalg is to drop the type argument `T` from `SGMatrix<T>` and `SGVector<T>` and put the type information in runtime.
 
+#### Pipeline
+Pipeline is a machine that chains multiple transformers and machines.
+It consists of a sequence of transformers as intermediate stages of training or testing and a machine as the final stage.
+Features are transformed by transformers and fed into the next stage sequentially.
+
+The pipeline instance is built using the `with` and `over` in PipelineBuilder.
+We use `with` to add transformers and then finalize with a machine passed to `over`, which returns a `Pipeline` instance.
+As `Pipeline` inherits directly from `Machine`, we can use it in exactly the same way as machines.
+This means that it supports the `train` and `machine` interface and we can also use it in cross validation.
+
+Internally stages are <name, pointer> pairs, where pointers are `CTransformer*` or `CMachine*` stored in `variant`.
+Since `variant` is available since C++17, I also introduced a C++11 compatible `variant` library to Shogun.
+
 #### Transformer
 The new transformer class is a combination of preprocessors and converters that provides a unified interface for features transformations.
 It supports standard `fit` + `transform` interface.
@@ -26,19 +39,6 @@ Removing them makes features much cleaner.
 `inverse_transform` is a new feature to Shogun.
 There are some transformers that are possible to support this feature, for example, `ICAConverter`, `LogPlusOne`.
 The inverse mode of these transformers are easy to implement. The future work will be implementing inverse mode for these transformers.
-
-#### Pipeline
-Pipeline is a machine that chains multiple transformers and machines.
-It consists of a sequence of transformers as intermediate stages of training or testing and a machine as the final stage.
-Features are transformed by transformers and fed into the next stage sequentially.
-
-The pipeline instance is built using the `with` and `over` in PipelineBuilder.
-We use `with` to add transformers and then finalize with a machine passed to `over`, which returns a `Pipeline` instance.
-As `Pipeline` inherits directly from `Machine`, we can use it in exactly the same way as machines.
-This means that it supports the `train` and `machine` interface and we can also use it in cross validation.
-
-Internally stages are <name, pointer> pairs, where pointers are `CTransformer*` or `CMachine*` stored in `variant`.
-Since `variant` is available since C++17, I also introduced a C++11 compatible `variant` library to Shogun.
 
 #### Custom Exception type
 Previously, `ShogunException` is thrown whenever an assertion fails or `SG_ERROR` is explicitly called.
@@ -62,6 +62,7 @@ A overloading method of `string_features` accepts string features and extra para
 
 #### Untemplated Linalg
 Making linalg untemplated is to store data in a void pointer and put the type information in runtime.
+We would like to move the template argument `T` of data types (`SGVector` and `SGMatrix`) and linalg to runtime and let the algorithms to check the type.
 When we are using untemplated data, such as Vector and Matrix, we have to check the type, which is a enumeration value, and do the switch.
 This way is not very effective since we will have to do this again and again.
 Therefore, based on the PR last year, I implemented lazy evaluation with expression templates.
