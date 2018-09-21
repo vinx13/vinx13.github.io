@@ -3,7 +3,7 @@ title: Home
 ---
 
 Hi, I am Wuwei Lin. 
-I'm a undergraduate junior student in [Shanghai Jiao Tong University](http://en.sjtu.edu.cn).
+I'm a undergraduate senior student in [Shanghai Jiao Tong University](http://en.sjtu.edu.cn).
 My research interests include computer vision and machine learning.
 Currently, I am a research assistant in [Machine Vision Intelligence Group](http://mvig.sjtu.edu.cn), advised by Prof. [Cewu Lu](http://mvig.sjtu.edu.cn/). 
 I worked for [Shogun](http://shogun.ml) this summer as a [GSoC 2018](https://summerofcode.withgoogle.com/projects/6031654070517760/) student.
