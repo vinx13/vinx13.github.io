@@ -17,6 +17,10 @@ canonifyURLs = false
     name = "Home"
     url = "/"
     weight = 1
+[[menu.main]]
+    name = "Project"
+    url = "/project"
+    weight = 2
 [[menu.feed]]
     name = "Subscribe"
     url = "/index.xml"
