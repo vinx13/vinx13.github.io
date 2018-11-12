@@ -48,6 +48,10 @@
   </url>
   
   <url>
+    <loc>http://wuwei.io/project/</loc>
+  </url>
+  
+  <url>
     <loc>http://wuwei.io/tags/gsoc/</loc>
     <lastmod>2018-08-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
