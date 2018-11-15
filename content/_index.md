@@ -13,7 +13,7 @@ I am now an intern in [TuSimple](http://www.tusimple.com/index-en.html), focused
 [GitHub](https://github.com/vinx13) / [Email](mailto:vincentl13x@gmail.com)
 
 ### Projects
-Checkout [here](/project) for details of the exciting projects I work on.
+Check out [here](/project) for details of the exciting projects I work on.
 
 ### Publication
 * [Recurrent Residual Module for Fast Inference in Videos](http://openaccess.thecvf.com/content_cvpr_2018/papers/Pan_Recurrent_Residual_Module_CVPR_2018_paper.pdf)

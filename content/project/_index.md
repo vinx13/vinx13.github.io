@@ -6,7 +6,8 @@ type: project
 
 ## TVM: End to End Deep Learning Compiler Stack
 {{<image-box "/img/stack_tvmlang.png" >}}
-TVM is an open deep learning compiler stack for CPUs, GPUs and specialized accelerators. It aims to close the gap between the productivity-focused deep learning frameworks, and the performance- or efficiency-oriented hardware backends. As a contributor and reviewer in TVM, I implemented TOPI quantized operators on CUDA. I also work on graph optimization in Relay.
+TVM is an open deep learning compiler stack for CPUs, GPUs and specialized accelerators. It aims to close the gap between the productivity-focused deep learning frameworks, and the performance- or efficiency-oriented hardware backends.  
+I am an active contributor to TVM. I have been focused on optimizing TOPI quantized operators on CUDA. Integrated with automatic tuning, these operators can achieve competitive performance compared with other frameworks such as cuDNN and TensorRT. I strive to reduce the difficulty of deployment of deep models and bring deep learning everywhere. I also contribute to a variety of parts of TVM and help with code review.
 
 * [TVM Project Page](https://tvm.ai)
 * [TVM Repo](https://github.com/dmlc/tvm/)
