@@ -9,5 +9,12 @@ footer {
     float: left;
     max-height: 200px;
     width: 300px;
-    margin: 0 30px;
+    margin: 0 30px 10px 0px;
+}
+
+.image-box > img {
+    max-width: 100%;
+    max-height: 200px;
+    margin: 0 auto;
+    display: block;
 }
