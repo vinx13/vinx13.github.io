@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TVM on Wuwei Lin</title>
+    <link>http://wuwei.io/tags/tvm/</link>
+    <description>Recent content in TVM on Wuwei Lin</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://wuwei.io/tags/tvm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Automating Optimization of Quantized Deep Learning Models on CUDA</title>
+      <link>http://wuwei.io/post/2019/04/automating-optimization-of-quantized-deep-learning-models-on-cuda/</link>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0800</pubDate>
+      
+      <guid>http://wuwei.io/post/2019/04/automating-optimization-of-quantized-deep-learning-models-on-cuda/</guid>
+      <description>Deep learning has been successfully applied to a variety of tasks. On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical. Network quantization is an effective approach to accelerating deep learning models. In quantized models, both data and model parameters are represented with low precision data types such as int8 and float16. The lowered data bandwidth reduces the inference time and memory/storage requirements, as well as the power consumption.</description>
+    </item>
+    
+  </channel>
+</rss>
