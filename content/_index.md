@@ -5,10 +5,10 @@ title: Home
 Hi, I am Wuwei Lin. 
 I'm a undergraduate senior student in [Shanghai Jiao Tong University](http://en.sjtu.edu.cn).
 I was a research assistant in [Machine Vision Intelligence Group](http://mvig.sjtu.edu.cn), advised by Prof. [Cewu Lu](http://mvig.sjtu.edu.cn/).
-My research interests include computer vision and machine learning.
-I worked for [Shogun](http://shogun.ml) this summer as a [GSoC 2018](https://summerofcode.withgoogle.com/projects/6031654070517760/) student.
+I worked for [Shogun](http://shogun.ml) [GSoC 2018](https://summerofcode.withgoogle.com/projects/6031654070517760/) student.
 During that period, I have done some refactor on features, transformers and linalg, aimed at modernizing legacy code of Shogun and making it easy to use.
 I am now an intern in [TuSimple](http://www.tusimple.com/index-en.html), with primary focus on quantized CUDA operators and graph optimization in [TVM](https://github.com/dmlc/tvm).
+
 ### Links
 [GitHub](https://github.com/vinx13) / [Email](mailto:vincentl13x@gmail.com)
 
