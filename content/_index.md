@@ -3,14 +3,15 @@ title: Home
 ---
 
 Hi, I am Wuwei Lin. 
-I'm a undergraduate senior student in [Shanghai Jiao Tong University](http://en.sjtu.edu.cn).
-I was a research assistant in [Machine Vision Intelligence Group](http://mvig.sjtu.edu.cn), advised by Prof. [Cewu Lu](http://mvig.sjtu.edu.cn/).
-I worked on [Shogun](http://shogun.ml) in [GSoC 2018](https://summerofcode.withgoogle.com/projects/6031654070517760/).
-During that period, I have done some refactor on features, transformers and linalg, aimed at modernizing legacy code of Shogun and making it easy to use.
-I am now an intern in [TuSimple](http://www.tusimple.com/index-en.html), with primary focus on quantized CUDA operators and graph optimization in [TVM](https://github.com/dmlc/tvm).
+I'm a master student at [Carnegie Mellon University](Carnegie Mellon University).
+I received my bachelor's degree from [Shanghai Jiao Tong University](http://en.sjtu.edu.cn), [School of Software](http://en.se.sjtu.edu.cn).
+I am an active contributor and committer to [TVM](https://tvm.ai), with primary focus on quantized CUDA operators and Relay.
+I worked on [Shogun](http://shogun.ml) in [GSoC 2018](https://summerofcode.withgoogle.com/projects/6031654070517760/), for
+refactoring and redesigning transformers, feature representation and linalg, aimed at modernizing the long-historied machine learning toolbox and making it easy to use.
+I am former intern of AWS Shanghai AI Lab and TuSimple.
 
 ### Links
-[GitHub](https://github.com/vinx13) / [Email](mailto:vincentl13x@gmail.com)
+[GitHub](https://github.com/vinx13) / [Email](mailto:wuwei@apache.org)
 
 ### Projects
 Check out [here](/project) for details of the exciting projects I work on.

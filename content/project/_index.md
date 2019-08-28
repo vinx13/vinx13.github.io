@@ -41,13 +41,4 @@ Experiment results show that our module yields significant inference speedup whi
 
 * [Paper in CVPR'18](http://openaccess.thecvf.com/content_cvpr_2018/papers/Pan_Recurrent_Residual_Module_CVPR_2018_paper.pdf)
 
-## Tongqu
-{{<image-box "/img/tongqu.png" >}}
-I led the development of Tongqu, the biggest event-finding platform in Shanghai Jiao Tong University.
-It allows students, student clubs, university staff and others to publish and find events on this platform.
 
-Tongqu is aimed to provide a platform for sharing information and enhancing diversity of the college activities, and help build a vigorous university community.
-
-* [Tongqu Website](https://tongqu.me)
-* [Google Play](https://play.google.com/store/apps/details?id=me.tongqu)
-* [Website of our Dongyue Studio](http://dongyuestudio.com)
