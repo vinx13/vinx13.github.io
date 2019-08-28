@@ -11,7 +11,7 @@ refactoring and redesigning transformers, feature representation and linalg, aim
 I am former intern of AWS Shanghai AI Lab and TuSimple.
 
 ### Links
-[GitHub](https://github.com/vinx13) / [Email](mailto:wuwei@apache.org)
+[GitHub](https://github.com/vinx13) / [Email](mailto:wuwei@apache.org) / [LinkedIn](https://www.linkedin.com/in/wuwei-lin/)
 
 ### Projects
 Check out [here](/project) for details of the exciting projects I work on.
