@@ -17,7 +17,8 @@
       <pubDate>Tue, 30 Apr 2019 00:00:00 +0800</pubDate>
       
       <guid>http://wuwei.io/post/2019/04/automating-optimization-of-quantized-deep-learning-models-on-cuda/</guid>
-      <description>Deep learning has been successfully applied to a variety of tasks. On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical. Network quantization is an effective approach to accelerating deep learning models. In quantized models, both data and model parameters are represented with low precision data types such as int8 and float16. The lowered data bandwidth reduces the inference time and memory/storage requirements, as well as the power consumption.</description>
+      <description>Chinese version / 中文版
+Deep learning has been successfully applied to a variety of tasks. On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical. Network quantization is an effective approach to accelerating deep learning models. In quantized models, both data and model parameters are represented with low precision data types such as int8 and float16. The lowered data bandwidth reduces the inference time and memory/storage requirements, as well as the power consumption.</description>
     </item>
     
   </channel>
