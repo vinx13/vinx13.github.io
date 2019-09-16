@@ -4,6 +4,8 @@ date:   2019-04-30 00:00:00 +0800
 tags:
   - TVM
 ---
+[Chinese version / 中文版](https://zhuanlan.zhihu.com/p/64461093)
+
 Deep learning has been successfully applied to a variety of tasks.
 On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical.
 Network quantization is an effective approach to accelerating deep learning models.
