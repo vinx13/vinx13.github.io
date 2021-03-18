@@ -3,7 +3,7 @@ title: Home
 ---
 
 Hi, I am Wuwei Lin.
-I'm a software engineer at [OctoML](https://octoml.ai/)
+I'm a software engineer at [OctoML](https://octoml.ai/).
 I received my master's degree from [Carnegie Mellon University](https://cmu.edu/) and bachelor's degree from [Shanghai Jiao Tong University](http://en.sjtu.edu.cn), [School of Software](http://en.se.sjtu.edu.cn).
 I am an active contributor and committer to [TVM](https://tvm.ai), with primary focus on quantized CUDA operators and Relay.
 I worked on [Shogun](http://shogun.ml) in [GSoC 2018](https://summerofcode.withgoogle.com/projects/6031654070517760/), for
