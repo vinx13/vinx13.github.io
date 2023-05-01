@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
     <title> | Wuwei Lin</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -44,7 +47,7 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "http://wuwei.io/"
+         "@id": "http:\/\/wuwei.io\/"
     },
     "articleSection" : "project",
     "name" : "",
@@ -57,9 +60,9 @@
     "accountablePerson" : "Wuwei Lin",
     "copyrightHolder" : "Wuwei Lin",
     "copyrightYear" : "0001",
-    "datePublished": "0001-01-01 00:00:00 &#43;0000 UTC",
-    "dateModified" : "0001-01-01 00:00:00 &#43;0000 UTC",
-    "url" : "http://wuwei.io/project/",
+    "datePublished": "0001-01-01 00:00:00 \u002b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \u002b0000 UTC",
+    "url" : "http:\/\/wuwei.io\/project\/",
     "wordCount" : "355",
     "keywords" : [ "Blog" ]
 }
@@ -73,52 +76,40 @@
     <br/>
 
 
-
-
 <h1 id="projects">Projects</h1>
-
 <h2 id="tvm-end-to-end-deep-learning-compiler-stack">TVM: End to End Deep Learning Compiler Stack</h2>
-
 <p><div class="image-box">
     <img src="/img/stack_tvmlang.png">
 </div>
 
 TVM is an open deep learning compiler stack for CPUs, GPUs and specialized accelerators. It aims to close the gap between the productivity-focused deep learning frameworks, and the performance- or efficiency-oriented hardware backends.</p>
-
 <p>I am an active contributor to TVM.
 I have been focused on TOPI quantized operators and graph optimization in Relay IR.
 I contributed a full set of quantized operators for CNN on CUDA. Integrated with automatic tuning, these operators on CUDA achieved competitive performance compared with other frameworks such as cuDNN and TensorRT.
 Relay is a new high level intermediate representation of the computational graph.
 The graph optimization eliminates unnecessary computation by combining and fusing parallel branches.
 I strive to reduce the difficulty of deployment of deep models and bring deep learning everywhere.</p>
-
 <ul>
 <li><a href="https://tvm.ai">TVM Project Page</a></li>
 <li><a href="https://github.com/dmlc/tvm/">TVM Repo</a></li>
 </ul>
-
 <h2 id="shogun-machine-learning-toolbox">Shogun Machine Learning Toolbox</h2>
-
 <p><div class="image-box">
     <img src="/img/shogun.png">
 </div>
 
 The Shogun Machine Learning Toolbox is devoted to making machine learning tools available for free, to everyone. It provides efficient implementation of all standard ML algorithms. Shogun ensures that the underlying algorithms are transparent and accessible—a unified interface provides access via many popular programming languages.</p>
-
 <p>As a Google Summer of Code participant in this project, I continued the ongoing detoxification of Shogun, and tackled a
 number of the long term design issues with the low level library.
 Shogun now has a clean transformer and a pipelining API using the latest C++ features. I also worked on improved exception handling, better subset data support, and some design drafts, such as a expression templates for
 Shogun&rsquo;s linear algebra.</p>
-
 <ul>
 <li><a href="http://shogun.ml/">Shogun Project Page</a></li>
 <li><a href="https://github.com/shogun-toolbox/shogun">Shogun Repo</a></li>
-<li><a href="https://summerofcode.withgoogle.com/projects/#6031654070517760">Google Summer of Code Project Page</a><br /></li>
+<li><a href="https://summerofcode.withgoogle.com/projects/#6031654070517760">Google Summer of Code Project Page</a></li>
 <li><a href="https://wuwei.io/tags/shogun">Blog posts</a></li>
 </ul>
-
 <h2 id="recurrent-residual-module-for-fast-inference-in-videos">Recurrent Residual Module for Fast Inference in Videos</h2>
-
 <p><div class="image-box">
     <img src="/img/rrm.png">
 </div>
@@ -127,9 +118,8 @@ Recurrent Residual Module is a module to accelerate the CNN inference for video 
 This module utilizes the similarity of the intermediate feature maps of two consecutive frames to largely reduce the redundant computation.
 One unique property of the proposed method compared to previous work is that feature maps of each frame are precisely computed.
 Experiment results show that our module yields significant inference speedup while maintain similar recognition performance.</p>
-
 <ul>
-<li><a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Pan_Recurrent_Residual_Module_CVPR_2018_paper.pdf">Paper in CVPR&rsquo;18</a></li>
+<li><a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Pan_Recurrent_Residual_Module_CVPR_2018_paper.pdf">Paper in CVPR'18</a></li>
 </ul>
 
 
@@ -166,20 +156,21 @@ Experiment results show that our module yields significant inference speedup whi
 </script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90229954-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
+}
 </script>
 
 
       
       <hr/>
-      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

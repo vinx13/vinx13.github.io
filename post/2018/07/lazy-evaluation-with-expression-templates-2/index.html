@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
     <title>Lazy Evaluation with Expression Templates (2) | Wuwei Lin</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -44,14 +47,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "http://wuwei.io/"
+         "@id": "http:\/\/wuwei.io\/"
     },
     "articleSection" : "post",
     "name" : "Lazy Evaluation with Expression Templates (2)",
     "headline" : "Lazy Evaluation with Expression Templates (2)",
-    "description" : "Progress so far
-Previously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix. For example,
-Vector a, b; auto c = add(a, b); Vector d = add(a, c);  In this example we create a addition expression of a and b, and then call add with an expression and a vector. In the second add expression, the argument c, which is a Vector, will be converted to a VectorRefExp.",
+    "description" : "Progress so far\nPreviously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix. For example,\nVector a, b; auto c = add(a, b); Vector d = add(a, c); In this example we create a addition expression of a and b, and then call add with an expression and a vector. In the second add expression, the argument c, which is a Vector, will be converted to a VectorRefExp.",
     "inLanguage" : "en-US",
     "author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
@@ -59,9 +60,9 @@ Vector a, b; auto c = add(a, b); Vector d = add(a, c);  In this example we creat
     "accountablePerson" : "Wuwei Lin",
     "copyrightHolder" : "Wuwei Lin",
     "copyrightYear" : "2018",
-    "datePublished": "2018-07-05 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2018-07-05 00:00:00 &#43;0000 UTC",
-    "url" : "http://wuwei.io/post/2018/07/lazy-evaluation-with-expression-templates-2/",
+    "datePublished": "2018-07-05 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2018-07-05 00:00:00 \u002b0000 UTC",
+    "url" : "http:\/\/wuwei.io\/post\/2018\/07\/lazy-evaluation-with-expression-templates-2\/",
     "wordCount" : "584",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
@@ -90,43 +91,32 @@ Vector a, b; auto c = add(a, b); Vector d = add(a, c);  In this example we creat
 </div>
 
 
-
-<main>
-<p><strong>Progress so far</strong><br />
+<div class="content-wrapper">
+  <main>
+    <p><strong>Progress so far</strong><br>
 Previously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix.
 For example,</p>
-
-<pre><code class="language-cpp">Vector a, b;
-auto c = add(a, b);
-Vector d = add(a, c);
-</code></pre>
-
-<p>In this example we create a addition expression of a and b, and then call <code>add</code> with an expression and a vector.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Vector a, b;
+<span style="color:#66d9ef">auto</span> c <span style="color:#f92672">=</span> add(a, b);
+Vector d <span style="color:#f92672">=</span> add(a, c);
+</code></pre></div><p>In this example we create a addition expression of a and b, and then call <code>add</code> with an expression and a vector.
 In the second <code>add</code> expression, the argument <code>c</code>, which is a <code>Vector</code>, will be converted to a <code>VectorRefExp</code>.
 Therefore, we can pass either plain data type <code>Vector</code>, <code>Matrix</code>, or expressions as arguments and we only need to deal with are expressions since we have implicit conversion from <code>Vector</code> and <code>Matrix</code>.</p>
-
-<p><strong>The problem</strong><br />
+<p><strong>The problem</strong><br>
 How to evaluate such an expression?
 Starting from one expression as root we go down to evaluate left hand side and right hand side sub-expressions until we reach some <code>VectorRefExp</code> that does not have sub-expressions any more.
 Since the whole process of evaluation happens in one time, it&rsquo;s possible to know the type information of all expressions involved.
 We hope to query type information of each expression only once when we start evaluation. For a <code>VectorRefExp</code>, we could just return the type of the underlying vector.</p>
-
 <p>What should we do for other expressions where the vector or matrix are actually not available?
 Similar to evaluation, we could also recursive query the type information until we hit the bottom.
 So we define a member function,</p>
-
-<pre><code>EPrimitiveType Exp::ptype() const;
-</code></pre>
-
-<p>that returns the primitive type of either the vector or matrix wrapped, or inferred type based on types of sub-expressions and the operation.
+<pre tabindex="0"><code>EPrimitiveType Exp::ptype() const;
+</code></pre><p>that returns the primitive type of either the vector or matrix wrapped, or inferred type based on types of sub-expressions and the operation.
 Hopefully in this case type can be inferred so we don&rsquo;t need to evaluate every expression involved.</p>
-
 <p>With type information of every expression available, we are now able to evaluate these lazy expressions. We check the type and call typed linalg routine. Then we construct untemplated <code>Vector</code> with the typed result (some <code>SGVector&lt;T&gt;</code> instance).</p>
-
-<p><strong>Full example</strong><br />
+<p><strong>Full example</strong><br>
 The full implementation for <code>BinaryVectorExp</code> is provided below. Note that we have both untemplated and templated method <code>eval</code>, which allows us to check the type in runtime and implement the actual evaluation with type information in <code>eval&lt;T&gt;</code>.</p>
-
-<pre><code>template &lt;class OP, class E1, class E2&gt;
+<pre tabindex="0"><code>template &lt;class OP, class E1, class E2&gt;
 BinaryVectorExp&lt;OP, E1, E&gt; : 
     public VectorExp&lt;BinaryVectorExp&lt;OP, E1, E2&gt;&gt;
 {
@@ -157,21 +147,16 @@ BinaryVectorExp&lt;OP, E1, E&gt; :
         return op.template apply(lhs_result, rhs_result);
     }
 };
-</code></pre>
-
-<p><strong>What&rsquo;s next?</strong><br />
+</code></pre><p><strong>What&rsquo;s next?</strong><br>
 We still have many problems to solve. For example, how to perform in-place operation. Expressions like <code>v = scale(v, 1.5);</code> can obviously performed in-place. One way is to overload the assignment operator above. But how do we deal with complex expressions which are DAGs actually. In this case we mush be careful not to overwrite data that will be used in other expressions.</p>
-
 <p>Another problem is whether we need untemplated scalar. Wrapping a scalar definitely means much overhead. However otherwise how can we implement <code>ScalarExp::eval</code> like that in <code>VectorExp</code> since we don&rsquo;t know the return type. Maybe we can implement a conversion operator to any primitive type like <code>float64_t</code> that triggers evaluation and then casts whatever types of result to the required type.</p>
-
 <p>Currently I don&rsquo;t have a better design, so I would see if we can somehow solve them in the future.</p>
-
 <p><em>The demo is available in <a href="https://github.com/vinx13/shogun-untemplated-demo">https://github.com/vinx13/shogun-untemplated-demo</a>.</em></p>
-
 <p><em>This work is inspired by <a href="https://github.com/dmlc/mshadow">mshadow</a>, <a href="https://github.com/boostorg/ublas">ublas</a> and <a href="https://github.com/NervanaSystems/ngraph">nGraph</a>.</em></p>
 
-</main>
-
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>
@@ -200,20 +185,21 @@ We still have many problems to solve. For example, how to perform in-place opera
 </script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90229954-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
+}
 </script>
 
 
       
       <hr/>
-      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

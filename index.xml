@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on Wuwei Lin</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Home on Wuwei Lin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0800</lastBuildDate>
-    
-	<atom:link href="http://wuwei.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0800</lastBuildDate><atom:link href="http://wuwei.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automating Optimization of Quantized Deep Learning Models on CUDA</title>
       <link>http://wuwei.io/post/2019/04/automating-optimization-of-quantized-deep-learning-models-on-cuda/</link>
@@ -78,7 +74,7 @@ Demo of Untemplated Linalg GitHub repo</description>
       <guid>http://wuwei.io/post/2018/07/lazy-evaluation-with-expression-templates-2/</guid>
       <description>Progress so far
 Previously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix. For example,
-Vector a, b; auto c = add(a, b); Vector d = add(a, c);  In this example we create a addition expression of a and b, and then call add with an expression and a vector. In the second add expression, the argument c, which is a Vector, will be converted to a VectorRefExp.</description>
+Vector a, b; auto c = add(a, b); Vector d = add(a, c); In this example we create a addition expression of a and b, and then call add with an expression and a vector. In the second add expression, the argument c, which is a Vector, will be converted to a VectorRefExp.</description>
     </item>
     
     <item>
@@ -88,7 +84,7 @@ Vector a, b; auto c = add(a, b); Vector d = add(a, c);  In this example we creat
       
       <guid>http://wuwei.io/post/2018/06/lazy-evaluation-with-expression-templates-1/</guid>
       <description>In last post I talked about the ongoing refactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime. Say you have some vectors and do some computations like
-Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element types of vectors and call templated routine linalg::add&amp;lt;T&amp;gt;. In this way we will have to switch every time, over each expression involved, e.</description>
+Vector a, b, c; c = add(add(a, b), c); A simple idea is to switch over element types of vectors and call templated routine linalg::add&amp;lt;T&amp;gt;. In this way we will have to switch every time, over each expression involved, e.</description>
     </item>
     
     <item>
@@ -118,7 +114,7 @@ In Shogun, we have preprocessors and converters, both operating on features and 
       <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
       
       <guid>http://wuwei.io/post/2018/05/gsoc18-overview/</guid>
-      <description>Projects of GSoC&amp;rsquo;18 were announced last week and I am happy that I will be working on Shogun over this summer. In this post, I am pleased to share some details of my project.
+      <description>Projects of GSoC&#39;18 were announced last week and I am happy that I will be working on Shogun over this summer. In this post, I am pleased to share some details of my project.
 Shogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C++ and providing interface in different languages via SWIG, it is a great place to hack.
 My project, Continuous Detoxification, will focus on redesigning and refactoring, aiming at modernizing Shogun&amp;rsquo;s codebase and improving experience for both users and developers.</description>
     </item>

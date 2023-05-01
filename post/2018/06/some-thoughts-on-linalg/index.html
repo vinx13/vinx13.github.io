@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
     <title>Some thoughts on linalg | Wuwei Lin</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -44,13 +47,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "http://wuwei.io/"
+         "@id": "http:\/\/wuwei.io\/"
     },
     "articleSection" : "post",
     "name" : "Some thoughts on linalg",
     "headline" : "Some thoughts on linalg",
-    "description" : "So in the next two weeks I&rsquo;m going to work on refactoring linalg of Shogun. The data types in Shogun, SGVector&lt;T&gt;, SGMatrix&lt;T&gt; are templated classes which maintain a piece of memory in either CPU or GPU and provide basic operations like array-like element access. linalg::, is the upper level module working with SGVector, SGMatrix, providing linalg algebra operations, like matrix additions / multiplications.
-Though SGVector and SGMatrix, as template classes, are capable to represent different data types (float32_t, float64_t, etc.",
+    "description" : "So in the next two weeks I\u0026rsquo;m going to work on refactoring linalg of Shogun. The data types in Shogun, SGVector\u0026lt;T\u0026gt;, SGMatrix\u0026lt;T\u0026gt; are templated classes which maintain a piece of memory in either CPU or GPU and provide basic operations like array-like element access. linalg::, is the upper level module working with SGVector, SGMatrix, providing linalg algebra operations, like matrix additions \/ multiplications.\nThough SGVector and SGMatrix, as template classes, are capable to represent different data types (float32_t, float64_t, etc.",
     "inLanguage" : "en-US",
     "author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
@@ -58,9 +60,9 @@ Though SGVector and SGMatrix, as template classes, are capable to represent diff
     "accountablePerson" : "Wuwei Lin",
     "copyrightHolder" : "Wuwei Lin",
     "copyrightYear" : "2018",
-    "datePublished": "2018-06-08 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2018-06-08 00:00:00 &#43;0000 UTC",
-    "url" : "http://wuwei.io/post/2018/06/some-thoughts-on-linalg/",
+    "datePublished": "2018-06-08 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2018-06-08 00:00:00 \u002b0000 UTC",
+    "url" : "http:\/\/wuwei.io\/post\/2018\/06\/some-thoughts-on-linalg\/",
     "wordCount" : "417",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
@@ -89,58 +91,47 @@ Though SGVector and SGMatrix, as template classes, are capable to represent diff
 </div>
 
 
-
-<main>
-<p>So in the next two weeks I&rsquo;m going to work on refactoring linalg of Shogun.
+<div class="content-wrapper">
+  <main>
+    <p>So in the next two weeks I&rsquo;m going to work on refactoring linalg of Shogun.
 The data types in Shogun, <code>SGVector&lt;T&gt;</code>, <code>SGMatrix&lt;T&gt;</code> are templated classes which maintain a piece of memory in either CPU or GPU and provide basic operations like array-like element access.
 <code>linalg::</code>, is the upper level module working with <code>SGVector</code>, <code>SGMatrix</code>, providing linalg algebra operations, like matrix additions / multiplications.</p>
-
 <p>Though <code>SGVector</code> and <code>SGMatrix</code>, as template classes, are capable to represent different data types (<code>float32_t</code>, <code>float64_t</code>, etc.), most algorithms in Shogun actually do not behave generically.
 They accept <code>CFeatures*</code> as input but later expect them to be dense features with <code>float64_t</code> element type. This is most of the cases in Shogun.</p>
-
 <p>There are ad-hoc solutions. For example, take a look at code of <code>LDA</code>.</p>
-
-<pre><code class="language-cpp">bool LDA::train_machine(CFeatures* data)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> LDA<span style="color:#f92672">::</span>train_machine(CFeatures<span style="color:#f92672">*</span> data)
 {
-    CDotFeatures* features;
-    // ...
-    if (features-&gt;get_feature_type() == F_SHORTREAL)
-        return train_machine_templated&lt;float32_t&gt;();
-    else if (features-&gt;get_feature_type() == F_DREAL)
-        return train_machine_templated&lt;float64_t&gt;();
-    else if (features-&gt;get_feature_type() == F_LONGREAL)
-        return train_machine_templated&lt;floatmax_t&gt;(); 
+    CDotFeatures<span style="color:#f92672">*</span> features;
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_SHORTREAL)
+        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>float32_t<span style="color:#f92672">&gt;</span>();
+    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_DREAL)
+        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>float64_t<span style="color:#f92672">&gt;</span>();
+    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_LONGREAL)
+        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>floatmax_t<span style="color:#f92672">&gt;</span>(); 
 }
-</code></pre>
-
-<p>We check the type in runtime and then call templated implementations. This solves the problem to some extent but we have to repeat similar things everywhere. And it does not make much sense to check the type in algorithm implementations since whether a specific data type is supported does not depend on the algorithm itself but the underlying mathematics operations used instead.</p>
-
+</code></pre></div><p>We check the type in runtime and then call templated implementations. This solves the problem to some extent but we have to repeat similar things everywhere. And it does not make much sense to check the type in algorithm implementations since whether a specific data type is supported does not depend on the algorithm itself but the underlying mathematics operations used instead.</p>
 <p>Another issue is linalg.
 Backed by Eigen or ViennaCL, linalg offers unified interface to backends.
 However, the number of interface in linalg is growing.
 Whenever we need a method in Eigen, say matrix decomposition, we add a new virtual method to linalg to wrap the function in the backend.
 In this way we actually break ABI compatibility.</p>
-
 <p>Besides, since data can be in either CPU or GPU, linalg has to check where data lives every time because it lacks context of former calls.
 Of course setting a global context is not the best choice since this is not a thread-safe way.</p>
-
 <p>So we are moving towards a un-templated type: <code>Matrix</code>, <code>Vector</code>, without the template argument <code>T</code>. Then everything will be checked in runtime. We will have <code>Matrix</code> implemented as something like</p>
-
-<pre><code class="language-cpp">class Matrix
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span>
 {
-    void* data;
+    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> data;
     Type type;
 };
-</code></pre>
-
-<p>This is actually from the ongoing PR last year.
+</code></pre></div><p>This is actually from the ongoing PR last year.
 However, in this case, we have to use a big switch to invoke the corresponding operation every time. This is much like the CPU/GPU checking problem above.</p>
-
 <p>With these challenges in mind, in the upcoming weeks I will be working on some new design of <code>linalg</code>.
 Stay tuned for updates :)</p>
 
-</main>
-
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>
@@ -169,20 +160,21 @@ Stay tuned for updates :)</p>
 </script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90229954-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
+}
 </script>
 
 
       
       <hr/>
-      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

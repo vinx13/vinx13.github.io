@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
     <title>Bringing features and labels views to Shogun | Wuwei Lin</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -44,12 +47,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "http://wuwei.io/"
+         "@id": "http:\/\/wuwei.io\/"
     },
     "articleSection" : "post",
     "name" : "Bringing features and labels views to Shogun",
     "headline" : "Bringing features and labels views to Shogun",
-    "description" : "This week I&rsquo;m happy to introduce the new thing to Shogun, features and labels view. In machine learning, operating on a subset of features or labels is usual, especially in recursive tree algorithms. The view, is a new instance of CFeatures or CLabels, or their subclasses, with a subset of data shared with the original instance. It is implemented as a global template function that accept a pointer or a small pointer to a viewable instance, and an index vector as arguments.",
+    "description" : "This week I\u0026rsquo;m happy to introduce the new thing to Shogun, features and labels view. In machine learning, operating on a subset of features or labels is usual, especially in recursive tree algorithms. The view, is a new instance of CFeatures or CLabels, or their subclasses, with a subset of data shared with the original instance. It is implemented as a global template function that accept a pointer or a small pointer to a viewable instance, and an index vector as arguments.",
     "inLanguage" : "en-US",
     "author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
@@ -57,9 +60,9 @@
     "accountablePerson" : "Wuwei Lin",
     "copyrightHolder" : "Wuwei Lin",
     "copyrightYear" : "2018",
-    "datePublished": "2018-07-28 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2018-07-28 00:00:00 &#43;0000 UTC",
-    "url" : "http://wuwei.io/post/2018/07/bringing-features-and-labels-views-to-shogun/",
+    "datePublished": "2018-07-28 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2018-07-28 00:00:00 \u002b0000 UTC",
+    "url" : "http:\/\/wuwei.io\/post\/2018\/07\/bringing-features-and-labels-views-to-shogun\/",
     "wordCount" : "389",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
@@ -88,44 +91,38 @@
 </div>
 
 
-
-<main>
-<p>This week I&rsquo;m happy to introduce the new thing to Shogun, features and labels view.
+<div class="content-wrapper">
+  <main>
+    <p>This week I&rsquo;m happy to introduce the new thing to Shogun, features and labels view.
 In machine learning, operating on a subset of features or labels is usual, especially in recursive tree algorithms.
 The view, is a new instance of <code>CFeatures</code> or <code>CLabels</code>, or their subclasses, with a subset of data shared with the original instance.
 It is implemented as a global template function that accept a pointer or a small pointer to a viewable instance, and an index vector as arguments.</p>
-
-<pre><code class="language-cpp">template &lt;typename T&gt;
-T* view(T* viewable, const SGVector&lt;index_t&gt;&amp; index)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+T<span style="color:#f92672">*</span> view(T<span style="color:#f92672">*</span> viewable, <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>index_t<span style="color:#f92672">&gt;&amp;</span> index)
 {
-    auto result = viewable-&gt;duplicate();
-    result-&gt;add_subset(index);
-    return result;
+    <span style="color:#66d9ef">auto</span> result <span style="color:#f92672">=</span> viewable<span style="color:#f92672">-&gt;</span>duplicate();
+    result<span style="color:#f92672">-&gt;</span>add_subset(index);
+    <span style="color:#66d9ef">return</span> result;
 }
 
-template &lt;typename T&gt;
-Some&lt;T&gt; view(Some&lt;T&gt; viewable, const SGVector&lt;index_t&gt;&amp; index);
-</code></pre>
-
-<p>Using templates makes it possible creating views for any viewable classes, as long as it supports <code>duplicate</code> and subset functionalities.
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+Some<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> view(Some<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> viewable, <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>index_t<span style="color:#f92672">&gt;&amp;</span> index);
+</code></pre></div><p>Using templates makes it possible creating views for any viewable classes, as long as it supports <code>duplicate</code> and subset functionalities.
 <code>duplicate</code> is a virtual function that creates a shadow copy of the instance by calling the constructor of the class. Note that we require it to be virtual so we can create an instance of subclasses given a pointer of the base class.</p>
-
-<p><strong>Motivation</strong><br />
+<p><strong>Motivation</strong><br>
 Why do we need views? Before it, we used subsets directly: given an instance of features or labels, we call <code>add_subset</code> to add an index vector to the subset stack.
 After that, data beyond the subset is excluded from the original instance as if it has never been there.
 And then after some processing, we call <code>remove_subset</code> to restore the state.</p>
-
 <p>Since we are moving towards immutable features and labels, direct mutation is obviously undesirable.
 Instead, we would like to create a new instance here, with only data shared to reduce the overhead of copy.
 Therefore, <code>view</code> is a quite helpful thing to this end.</p>
-
-<p><strong>Design Choices</strong><br />
+<p><strong>Design Choices</strong><br>
 Why don&rsquo;t we make it a method of <code>CFeatures</code> and <code>CLabels</code>? We actually had a try for this. If we put it in the base class and make it inherited by subclasses, we have to use the base class pointer, e.g. <code>CFeatures*</code> or <code>CLabels*</code> as the return type. Then when we call it via a subclass instance, we will get a base class pointer as result and have to manually cast it to the subtype. This will be much repetitions in our code.</p>
-
 <p>So finally I decided it to make it global template which provides much flexibility. This also avoids duplication when implementing views for both features and labels.</p>
 
-</main>
-
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>
@@ -154,20 +151,21 @@ Why don&rsquo;t we make it a method of <code>CFeatures</code> and <code>CLabels<
 </script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90229954-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
+}
 </script>
 
 
       
       <hr/>
-      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

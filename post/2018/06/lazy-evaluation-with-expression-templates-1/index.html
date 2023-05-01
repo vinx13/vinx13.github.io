@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
     <title>Lazy Evaluation with Expression Templates (1) | Wuwei Lin</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -44,13 +47,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "http://wuwei.io/"
+         "@id": "http:\/\/wuwei.io\/"
     },
     "articleSection" : "post",
     "name" : "Lazy Evaluation with Expression Templates (1)",
     "headline" : "Lazy Evaluation with Expression Templates (1)",
-    "description" : "In last post I talked about the ongoing refactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime. Say you have some vectors and do some computations like
-Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element types of vectors and call templated routine linalg::add&lt;T&gt;. In this way we will have to switch every time, over each expression involved, e.",
+    "description" : "In last post I talked about the ongoing refactor of linalg. So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime. Say you have some vectors and do some computations like\nVector a, b, c; c = add(add(a, b), c); A simple idea is to switch over element types of vectors and call templated routine linalg::add\u0026lt;T\u0026gt;. In this way we will have to switch every time, over each expression involved, e.",
     "inLanguage" : "en-US",
     "author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
@@ -58,9 +60,9 @@ Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element 
     "accountablePerson" : "Wuwei Lin",
     "copyrightHolder" : "Wuwei Lin",
     "copyrightYear" : "2018",
-    "datePublished": "2018-06-26 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2018-06-26 00:00:00 &#43;0000 UTC",
-    "url" : "http://wuwei.io/post/2018/06/lazy-evaluation-with-expression-templates-1/",
+    "datePublished": "2018-06-26 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2018-06-26 00:00:00 \u002b0000 UTC",
+    "url" : "http:\/\/wuwei.io\/post\/2018\/06\/lazy-evaluation-with-expression-templates-1\/",
     "wordCount" : "581",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
@@ -89,116 +91,89 @@ Vector a, b, c; c = add(add(a, b), c);  A simple idea is to switch over element 
 </div>
 
 
-
-<main>
-<p>In last post I talked about the ongoing refactor of linalg.
+<div class="content-wrapper">
+  <main>
+    <p>In last post I talked about the ongoing refactor of linalg.
 So we are going to have untemplated vector and matrix types, using a void pointer and checking type information in runtime.
 Say you have some vectors and do some computations like</p>
-
-<pre><code class="language-cpp">Vector a, b, c;
-c = add(add(a, b), c);
-</code></pre>
-
-<p>A simple idea is to switch over element types of vectors and call templated routine <code>linalg::add&lt;T&gt;</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Vector a, b, c;
+c <span style="color:#f92672">=</span> add(add(a, b), c);
+</code></pre></div><p>A simple idea is to switch over element types of vectors and call templated routine <code>linalg::add&lt;T&gt;</code>.
 In this way we will have to switch every time, over each expression involved, e.g, a, b, c and a+b.
 This is not desirable not only for runtime overhead but also much boilerplate code we will have to add.</p>
-
 <p>To prevent redundant big switches every time, lazy evaluation is a quite nice idea here. Let&rsquo;s start with a simple <code>Vector</code>:</p>
-
-<pre><code class="language-cpp">class Vector {
-public:
-    Vector(void* data, EPrimitiveType ptype);
-    operator SGVector&lt;T&gt;();
-private:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Vector</span> {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Vector(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> data, EPrimitiveType ptype);
+    <span style="color:#66d9ef">operator</span> SGVector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>();
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
     EPrimitiveType ptype;
-    void* data;
+    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> data;
 };
-</code></pre>
-
-<p>It has templated conversion operator, which allows conversion to <code>SGVector&lt;T&gt;</code> that shares the underlying memory.</p>
-
+</code></pre></div><p>It has templated conversion operator, which allows conversion to <code>SGVector&lt;T&gt;</code> that shares the underlying memory.</p>
 <p>To support lazy evaluation, we define expression types to represent the expression to be evaluated such that a expression tree consisting of multiple expressions can be evaluated at one time.</p>
-
-<pre><code class="language-cpp">template &lt;typename E&gt;
-class Exp {
-    E&amp; self() { return *static_cast&lt;E*&gt;(this) }
-    const E&amp; self() const { return *static_cast&lt;const E*&gt;(this); }
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> E<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Exp</span> {
+    E<span style="color:#f92672">&amp;</span> self() { <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>E<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>) }
+    <span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> self() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> E<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>); }
 }
-</code></pre>
-
-<p>Note that <code>Exp</code> is a templated class since we are using CRTP pattern to support static polymorphism.</p>
-
+</code></pre></div><p>Note that <code>Exp</code> is a templated class since we are using CRTP pattern to support static polymorphism.</p>
 <p>One of the expression types we have is <code>VectorExp</code>. By <code>Vector</code> it means that it evaluates to some <code>Vector</code>. Similarly we can have <code>MatrixExp</code> and so on. Then we can derive specific types of vector expressions., for example <code>BinaryVectorExp</code> is a template class that represents some binary expressions with a custom operator.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> E<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VectorExp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Exp<span style="color:#f92672">&lt;</span>VectorExp<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;&gt;</span>;
 
-<pre><code class="language-cpp">template &lt;typename E&gt;
-class VectorExp: public Exp&lt;VectorExp&lt;E&gt;&gt;;
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span>
+    <span style="color:#66d9ef">typename</span> OP, 
+    <span style="color:#66d9ef">typename</span> E1, 
+    <span style="color:#66d9ef">typename</span> E2
+<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryVectorExp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> VectorExp<span style="color:#f92672">&lt;</span>BinaryVectorExp<span style="color:#f92672">&lt;</span>OP, E1, E2<span style="color:#f92672">&gt;&gt;</span>;
+</code></pre></div><p>Here <code>OP</code> is an operator class that defines the templated evaluation process. For example, vector addition can be defined like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">VectorAdd</span> {
+    VectorAdd(<span style="color:#66d9ef">double</span> alpha, <span style="color:#66d9ef">double</span> beta)<span style="color:#f92672">:</span> alpha(alpha), beta(beta) { }
 
-template &lt;
-    typename OP, 
-    typename E1, 
-    typename E2
-&gt;
-class BinaryVectorExp: public VectorExp&lt;BinaryVectorExp&lt;OP, E1, E2&gt;&gt;;
-</code></pre>
-
-<p>Here <code>OP</code> is an operator class that defines the templated evaluation process. For example, vector addition can be defined like:</p>
-
-<pre><code class="language-cpp">struct VectorAdd {
-    VectorAdd(double alpha, double beta): alpha(alpha), beta(beta) { }
-
-    template&lt;T&gt;
-    SGVector&lt;T&gt; apply (
-        const SGVector&lt;T&gt;&amp; a, 
-        const SGVector&lt;T&gt;&amp; b
+    <span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
+    SGVector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> apply (
+        <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> a, 
+        <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> b
     ) {
-        return linalg::add(a, b, alpha, beta);
+        <span style="color:#66d9ef">return</span> linalg<span style="color:#f92672">::</span>add(a, b, alpha, beta);
     }
 
-    double alpha, beta;
+    <span style="color:#66d9ef">double</span> alpha, beta;
 };
-</code></pre>
-
-<p>Now we can put things to an expression. An expression may contain simply a vector, or one or more expressions and an operator. The problem we have now is how we put a vector to an expression since it is an expression actually. This is important since it is reasonable that <code>add</code> can accept both <code>Vector</code> and <code>VectorExp</code>. We define the expression type, <code>VectorRefExp</code>. By wrapping a <code>Vector</code> instance into a <code>VectorRefExp</code>, we are able to use vector as other expression types when writing an expression.</p>
-
-<pre><code class="language-cpp">class VectorRefExp: public VectorExp&lt;VectorRefExp&gt;
+</code></pre></div><p>Now we can put things to an expression. An expression may contain simply a vector, or one or more expressions and an operator. The problem we have now is how we put a vector to an expression since it is an expression actually. This is important since it is reasonable that <code>add</code> can accept both <code>Vector</code> and <code>VectorExp</code>. We define the expression type, <code>VectorRefExp</code>. By wrapping a <code>Vector</code> instance into a <code>VectorRefExp</code>, we are able to use vector as other expression types when writing an expression.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VectorRefExp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> VectorExp<span style="color:#f92672">&lt;</span>VectorRefExp<span style="color:#f92672">&gt;</span>
 {
-private:
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
     Vector vector;
 };
-</code></pre>
-
-<p>The last step for this is to define a wrapper method can accept either <code>Vector</code> or <code>VectorExp</code>. Let&rsquo;s continue with the vector addition example above.</p>
-
-<pre><code class="language-cpp">template &lt;
-    typename E1,
-    typename E2
-&gt;
-auto add_impl(VectorExp&lt;E1&gt; e1, VectorExp&lt;E2&gt; e2, double alpha, double beta)
+</code></pre></div><p>The last step for this is to define a wrapper method can accept either <code>Vector</code> or <code>VectorExp</code>. Let&rsquo;s continue with the vector addition example above.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span>
+    <span style="color:#66d9ef">typename</span> E1,
+    <span style="color:#66d9ef">typename</span> E2
+<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">auto</span> add_impl(VectorExp<span style="color:#f92672">&lt;</span>E1<span style="color:#f92672">&gt;</span> e1, VectorExp<span style="color:#f92672">&lt;</span>E2<span style="color:#f92672">&gt;</span> e2, <span style="color:#66d9ef">double</span> alpha, <span style="color:#66d9ef">double</span> beta)
 {
-    return BinaryVectorExp(VectorAdd(alpha, beta), e1.self(), e2.self());
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">BinaryVectorExp</span>(VectorAdd(alpha, beta), e1.self(), e2.self());
 }
 
-template &lt;typename... Args&gt;
-auto add(Args&amp;&amp; args...)
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Args<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">auto</span> add(Args<span style="color:#f92672">&amp;&amp;</span> args...)
 {
-    return add_impl(forward_exp&lt;Args&gt;(args)...);
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">add_impl</span>(forward_exp<span style="color:#f92672">&lt;</span>Args<span style="color:#f92672">&gt;</span>(args)...);
 }
-</code></pre>
-
-<p>In this example, arguments are forwarded to <code>add_impl</code> and cast to <code>VectorRefExp</code> whenever <code>Vector</code> is passed by <code>forward_exp</code>.</p>
-
+</code></pre></div><p>In this example, arguments are forwarded to <code>add_impl</code> and cast to <code>VectorRefExp</code> whenever <code>Vector</code> is passed by <code>forward_exp</code>.</p>
 <p>Now we could write down our lazy expression like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Vector a, b;
+<span style="color:#75715e">// do some initialization
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> c <span style="color:#f92672">=</span> add(a, b); <span style="color:#75715e">// c is an intermediate expression
+</span><span style="color:#75715e"></span>Vector d <span style="color:#f92672">=</span> add(c, a); <span style="color:#75715e">// implicitly trigger evaluation when assigning to a vector
+</span></code></pre></div><p>How do we evaluate such an expression? Let&rsquo;s talk about it in the next post.</p>
 
-<pre><code class="language-cpp">Vector a, b;
-// do some initialization
-auto c = add(a, b); // c is an intermediate expression
-Vector d = add(c, a); // implicitly trigger evaluation when assigning to a vector
-</code></pre>
-
-<p>How do we evaluate such an expression? Let&rsquo;s talk about it in the next post.</p>
-
-</main>
-
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>
@@ -227,20 +202,21 @@ Vector d = add(c, a); // implicitly trigger evaluation when assigning to a vecto
 </script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90229954-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
+}
 </script>
 
 
       
       <hr/>
-      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
     <title>New Transformers in Shogun | Wuwei Lin</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -44,14 +47,12 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": "http://wuwei.io/"
+         "@id": "http:\/\/wuwei.io\/"
     },
     "articleSection" : "post",
     "name" : "New Transformers in Shogun",
     "headline" : "New Transformers in Shogun",
-    "description" : "The first two weeks of GSoC have ended. Here I will share my progress so far.
-In the first two weeks, I have been mostly working on the new transformer class, CTransformer. It is introduced mainly for two purposes: 1) Providing generic and unified interface for data transformation. 2) Make features immutable.
-In Shogun, we have preprocessors and converters, both operating on features and applying some transformations. The major distinction between them I think is that preprocessors support on-the-fly evaluation: we can add several preprocessors by add_preprocessor and then apply them when calling get_feature_vector.",
+    "description" : "The first two weeks of GSoC have ended. Here I will share my progress so far.\nIn the first two weeks, I have been mostly working on the new transformer class, CTransformer. It is introduced mainly for two purposes: 1) Providing generic and unified interface for data transformation. 2) Make features immutable.\nIn Shogun, we have preprocessors and converters, both operating on features and applying some transformations. The major distinction between them I think is that preprocessors support on-the-fly evaluation: we can add several preprocessors by add_preprocessor and then apply them when calling get_feature_vector.",
     "inLanguage" : "en-US",
     "author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
@@ -59,9 +60,9 @@ In Shogun, we have preprocessors and converters, both operating on features and 
     "accountablePerson" : "Wuwei Lin",
     "copyrightHolder" : "Wuwei Lin",
     "copyrightYear" : "2018",
-    "datePublished": "2018-05-27 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2018-05-27 00:00:00 &#43;0000 UTC",
-    "url" : "http://wuwei.io/post/2018/05/new-transformers-in-shogun/",
+    "datePublished": "2018-05-27 00:00:00 \u002b0000 UTC",
+    "dateModified" : "2018-05-27 00:00:00 \u002b0000 UTC",
+    "url" : "http:\/\/wuwei.io\/post\/2018\/05\/new-transformers-in-shogun\/",
     "wordCount" : "437",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
@@ -90,43 +91,37 @@ In Shogun, we have preprocessors and converters, both operating on features and 
 </div>
 
 
-
-<main>
-
-
-<p>The first two weeks of GSoC have ended. Here I will share my progress so far.</p>
-
+<div class="content-wrapper">
+  <main>
+    <p>The first two weeks of GSoC have ended. Here I will share my progress so far.</p>
 <p>In the first two weeks, I have been mostly working on the new transformer class, <code>CTransformer</code>. It is introduced mainly for two purposes: 1) Providing generic and unified interface for data transformation. 2) Make features immutable.</p>
-
 <p>In Shogun, we have preprocessors and converters, both operating on features and applying some transformations. The major distinction between them I think is that preprocessors support on-the-fly evaluation: we can add several preprocessors by <code>add_preprocessor</code> and then apply them when calling <code>get_feature_vector</code>. Other than that, they mostly do the same thing. So it would be good if they provide unified interface. The story is, in machine learning, we always work with either features or labels, that everything can be fit or transform. To this end, transformers are introduced as an abstraction of of converters and preprocessors with two-staged API: fit + transform.</p>
-
-<pre><code>    void fit(CFeatures* features);
+<pre tabindex="0"><code>    void fit(CFeatures* features);
     void fit(CFeatures* features, CLabels* labels);
     CFeatures* transform(CFeatures* features, bool inplace);
-</code></pre>
-
-<p>The transformers learn model parameters from features and possibly labels during the fit stage. For those that do not need initialization, the fit can be implemented simply as a no-op.</p>
-
+</code></pre><p>The transformers learn model parameters from features and possibly labels during the fit stage. For those that do not need initialization, the fit can be implemented simply as a no-op.</p>
 <p>In transform, it takes some features as input, performs the transformation and returns the result feature which is a brand new <code>CFeatures</code> instance. The reason that a new CFeatures is always created is exactly that features are (or should be) immutable. This is also the first step of refactoring towards immutable features. On the other hand, efficient transformers are desirable. It would be disappointing if we need to copy data again and again. Hopefully, most transformers support in-place mode. In this situation, although new features are created, the underlying data (e.g matrix, string list) are shared, which minimizes the overhead for immutable features.</p>
-
 <p>The implementation is actually very tricky to support the in-place option. For example, in the <code>DensePreprocessor</code> case, we obtain the feature matrix and possibly create a clone if not in-place. After performing transformation on the matrix (we have <code>apply_to_matrix</code> implemented in every subclass of <code>DensePreprocessor</code>), we create a new <code>DenseFeatures</code> instance with the existing feature matrix and then unref the input features. Unfortunately the ref counting here has brought me much trouble and I have wasted much time here :)</p>
-
 <h3 id="a-brief-summary-of-pr">A brief summary of PR</h3>
-
 <ul>
-<li><p><a href="https://github.com/shogun-toolbox/shogun/pull/4290">#4290</a>
+<li>
+<p><a href="https://github.com/shogun-toolbox/shogun/pull/4290">#4290</a>
 <a href="https://github.com/shogun-toolbox/shogun/pull/4295">#4295</a> :
-We can use <code>variant</code> in Shogun now. Based on whether c++17 is available, it will choose either std::variant or mpark::variant</p></li>
-
-<li><p><a href="https://github.com/shogun-toolbox/shogun/pull/4292">#4292</a>
+We can use <code>variant</code> in Shogun now. Based on whether c++17 is available, it will choose either std::variant or mpark::variant</p>
+</li>
+<li>
+<p><a href="https://github.com/shogun-toolbox/shogun/pull/4292">#4292</a>
 <a href="https://github.com/shogun-toolbox/shogun/pull/4302">#4302</a>:
-We finally have <code>RealFeatures</code> dropped in all notebooks. Besides, tag-based getters / setters are used in more cases.</p></li>
-
-<li><p><a href="https://github.com/shogun-toolbox/shogun/pull/4285">#4285</a> : a very huge PR for transformers :)</p></li>
+We finally have <code>RealFeatures</code> dropped in all notebooks. Besides, tag-based getters / setters are used in more cases.</p>
+</li>
+<li>
+<p><a href="https://github.com/shogun-toolbox/shogun/pull/4285">#4285</a> : a very huge PR for transformers :)</p>
+</li>
 </ul>
 
-</main>
-
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>
@@ -155,20 +150,21 @@ We finally have <code>RealFeatures</code> dropped in all notebooks. Besides, tag
 </script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90229954-1', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
+}
 </script>
 
 
       
       <hr/>
-      ©2018 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>
