@@ -2,7 +2,7 @@ baseurl = "http://wuwei.io/"
 languageCode = "en-us"
 title = "Wuwei Lin"
 theme = "hugo-classic"
-googleAnalytics = "UA-90229954-1"
+googleAnalytics = "G-C3R4MHW8C9"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 preserveTaxonomyNames = true
 enableEmoji = true
@@ -26,7 +26,7 @@ canonifyURLs = false
     url = "/index.xml"
 
 [params]
-    footer = "©2018 Wuwei Lin | Theme by [Hugo-Classic](https://github.com/vinx13/hugo-classic)" 
+    footer = "©2023 Wuwei Lin | Theme by [Hugo-Classic](https://github.com/vinx13/hugo-classic)" 
     custom_css = ["css/theme-override.css"]
 
 [author]
