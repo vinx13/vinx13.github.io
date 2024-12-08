@@ -52,9 +52,9 @@
     "articleSection" : "post",
     "name" : "GSoC\u002718: Overview",
     "headline" : "GSoC\u002718: Overview",
-    "description" : "Projects of GSoC\u002718 were announced last week and I am happy that I will be working on Shogun over this summer. In this post, I am pleased to share some details of my project.\nShogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C\u002b\u002b and providing interface in different languages via SWIG, it is a great place to hack.\nMy project, Continuous Detoxification, will focus on redesigning and refactoring, aiming at modernizing Shogun\u0026rsquo;s codebase and improving experience for both users and developers.",
+    "description" : "\u003cp\u003eProjects of GSoC\u002718 were announced last week and I am happy that I will be working on \u003ca href=\u0022http:\/\/shogun.ml\u0022\u003eShogun\u003c\/a\u003e over this summer. In this post, I am pleased to share some details of my project.\u003c\/p\u003e\n\u003cp\u003eShogun is a versatile machine learning toolbox that offers a bunch of convinent and unified algorithm implementations. Written in C\u002b\u002b and providing interface in different languages via SWIG, it is a great place to hack.\u003c\/p\u003e\n\u003cp\u003eMy project, \u003ca href=\u0022https:\/\/summerofcode.withgoogle.com\/projects\/#6031654070517760\u0022\u003eContinuous Detoxification\u003c\/a\u003e, will focus on redesigning and refactoring, aiming at modernizing Shogun\u0026rsquo;s codebase and improving experience for both users and developers. As a project lasting for more than ten years, some parts of Shogun are old and not well-designed. For example, parallel cross validation is not thread safe because features are modified in some algorithms and thus cannot be shared. So, as the first part of my project, I would like to make features immutable. There are several blockers that need to be addressed first. Algorithms that rely on mutation of features will be refactored and preprocessors which are coupled with features need to be redesigned as well. Besides, views of features and labels will be introduced to enable sharing underlying data between features or labels. Some other parts will be taken care as well for thread safety. After we have immutable features, we can safely enable parallel cross validation.\u003c\/p\u003e",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -63,7 +63,7 @@
     "datePublished": "2018-05-05 00:00:00 \u002b0000 UTC",
     "dateModified" : "2018-05-05 00:00:00 \u002b0000 UTC",
     "url" : "http:\/\/wuwei.io\/post\/2018\/05\/gsoc18-overview\/",
-    "wordCount" : "437",
+    "wordCount" : "439",
     "keywords" : [ "GSoC","Shogun","Blog" ]
 }
 </script>
@@ -130,21 +130,24 @@
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

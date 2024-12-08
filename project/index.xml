@@ -4,7 +4,8 @@
     <title>Wuwei Lin</title>
     <link>http://wuwei.io/project/</link>
     <description>Recent content on Wuwei Lin</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://wuwei.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://wuwei.io/project/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

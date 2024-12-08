@@ -52,9 +52,9 @@
     "articleSection" : "post",
     "name" : "Lazy Evaluation with Expression Templates (2)",
     "headline" : "Lazy Evaluation with Expression Templates (2)",
-    "description" : "Progress so far\nPreviously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix. For example,\nVector a, b; auto c = add(a, b); Vector d = add(a, c); In this example we create a addition expression of a and b, and then call add with an expression and a vector. In the second add expression, the argument c, which is a Vector, will be converted to a VectorRefExp.",
+    "description" : "\u003cp\u003e\u003cstrong\u003eProgress so far\u003c\/strong\u003e\u003cbr\u003e\nPreviously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix.\nFor example,\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 style=\u0022color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;\u0022\u003e\u003ccode class=\u0022language-cpp\u0022 data-lang=\u0022cpp\u0022\u003e\u003cspan style=\u0022display:flex;\u0022\u003e\u003cspan\u003eVector a, b;\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan style=\u0022display:flex;\u0022\u003e\u003cspan\u003e\u003cspan style=\u0022color:#66d9ef\u0022\u003eauto\u003c\/span\u003e c \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e add(a, b);\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan style=\u0022display:flex;\u0022\u003e\u003cspan\u003eVector d \u003cspan style=\u0022color:#f92672\u0022\u003e=\u003c\/span\u003e add(a, c);\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003eIn this example we create a addition expression of a and b, and then call \u003ccode\u003eadd\u003c\/code\u003e with an expression and a vector.\nIn the second \u003ccode\u003eadd\u003c\/code\u003e expression, the argument \u003ccode\u003ec\u003c\/code\u003e, which is a \u003ccode\u003eVector\u003c\/code\u003e, will be converted to a \u003ccode\u003eVectorRefExp\u003c\/code\u003e.\nTherefore, we can pass either plain data type \u003ccode\u003eVector\u003c\/code\u003e, \u003ccode\u003eMatrix\u003c\/code\u003e, or expressions as arguments and we only need to deal with are expressions since we have implicit conversion from \u003ccode\u003eVector\u003c\/code\u003e and \u003ccode\u003eMatrix\u003c\/code\u003e.\u003c\/p\u003e",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -96,10 +96,10 @@
     <p><strong>Progress so far</strong><br>
 Previously we have implemented lazy expressions using expression template. With expression APIs, we could seamlessly use expressions as vector and matrix.
 For example,</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Vector a, b;
-<span style="color:#66d9ef">auto</span> c <span style="color:#f92672">=</span> add(a, b);
-Vector d <span style="color:#f92672">=</span> add(a, c);
-</code></pre></div><p>In this example we create a addition expression of a and b, and then call <code>add</code> with an expression and a vector.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Vector a, b;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> c <span style="color:#f92672">=</span> add(a, b);
+</span></span><span style="display:flex;"><span>Vector d <span style="color:#f92672">=</span> add(a, c);
+</span></span></code></pre></div><p>In this example we create a addition expression of a and b, and then call <code>add</code> with an expression and a vector.
 In the second <code>add</code> expression, the argument <code>c</code>, which is a <code>Vector</code>, will be converted to a <code>VectorRefExp</code>.
 Therefore, we can pass either plain data type <code>Vector</code>, <code>Matrix</code>, or expressions as arguments and we only need to deal with are expressions since we have implicit conversion from <code>Vector</code> and <code>Matrix</code>.</p>
 <p><strong>The problem</strong><br>
@@ -185,21 +185,24 @@ We still have many problems to solve. For example, how to perform in-place opera
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

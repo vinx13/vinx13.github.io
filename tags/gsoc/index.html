@@ -54,7 +54,7 @@
     "headline" : "GSoC",
     "description" : "",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -162,21 +162,24 @@
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

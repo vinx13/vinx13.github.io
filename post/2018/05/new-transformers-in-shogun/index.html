@@ -52,9 +52,9 @@
     "articleSection" : "post",
     "name" : "New Transformers in Shogun",
     "headline" : "New Transformers in Shogun",
-    "description" : "The first two weeks of GSoC have ended. Here I will share my progress so far.\nIn the first two weeks, I have been mostly working on the new transformer class, CTransformer. It is introduced mainly for two purposes: 1) Providing generic and unified interface for data transformation. 2) Make features immutable.\nIn Shogun, we have preprocessors and converters, both operating on features and applying some transformations. The major distinction between them I think is that preprocessors support on-the-fly evaluation: we can add several preprocessors by add_preprocessor and then apply them when calling get_feature_vector.",
+    "description" : "\u003cp\u003eThe first two weeks of GSoC have ended. Here I will share my progress so far.\u003c\/p\u003e\n\u003cp\u003eIn the first two weeks, I have been mostly working on the new transformer class, \u003ccode\u003eCTransformer\u003c\/code\u003e. It is introduced mainly for two purposes: 1) Providing generic and unified interface for data transformation. 2) Make features immutable.\u003c\/p\u003e\n\u003cp\u003eIn Shogun, we have preprocessors and converters, both operating on features and applying some transformations. The major distinction between them I think is that preprocessors support on-the-fly evaluation: we can add several preprocessors by \u003ccode\u003eadd_preprocessor\u003c\/code\u003e and then apply them when calling \u003ccode\u003eget_feature_vector\u003c\/code\u003e. Other than that, they mostly do the same thing. So it would be good if they provide unified interface. The story is, in machine learning, we always work with either features or labels, that everything can be fit or transform. To this end, transformers are introduced as an abstraction of of converters and preprocessors with two-staged API: fit \u002b transform.\u003c\/p\u003e",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -150,21 +150,24 @@ We finally have <code>RealFeatures</code> dropped in all notebooks. Besides, tag
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

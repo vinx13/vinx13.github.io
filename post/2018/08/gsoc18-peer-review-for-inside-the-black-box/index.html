@@ -52,9 +52,9 @@
     "articleSection" : "post",
     "name" : "GSoC\u002718: Peer Review for Inside the Black Box",
     "headline" : "GSoC\u002718: Peer Review for Inside the Black Box",
-    "description" : "This is my review for Shubham’s project, Inside the Black Box (project page, final report) this summer. His work covers some important topics about user experience and internal implementation of Shogun.\nMain Idea StoppableSGObject extends the premature stopping machine last year. The macro COMPUTATIONS_CONTROLLERS makes it possible to respond to signals during training. This a helpful since we user can interrupt the training and then possibly resume. Moving these things to the base class StoppableSGObject makes CMachine class much cleaner.",
+    "description" : "\u003cp\u003eThis is my review for Shubham’s project, Inside the Black Box (\u003ca href=\u0022https:\/\/summerofcode.withgoogle.com\/projects\/6010966421012480\u0022\u003eproject page\u003c\/a\u003e, \u003ca href=\u0022https:\/\/shubham808.github.io\/blog\/gsoc\u002718\/Final-Report\u0022\u003efinal report\u003c\/a\u003e) this summer.\nHis work covers some important topics about user experience and internal implementation of Shogun.\u003c\/p\u003e\n\u003ch4 id=\u0022main-idea\u0022\u003eMain Idea\u003c\/h4\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/github.com\/shogun-toolbox\/shogun\/blob\/develop\/src\/shogun\/lib\/StoppableSGObject.h\u0022\u003e\u003ccode\u003eStoppableSGObject\u003c\/code\u003e\u003c\/a\u003e extends the premature stopping machine last year.\nThe macro \u003ca href=\u0022https:\/\/github.com\/shogun-toolbox\/shogun\/blob\/41888fe7c8dc3797063d674f452e13351f321338\/src\/shogun\/lib\/StoppableSGObject.h#L18\u0022\u003e\u003ccode\u003eCOMPUTATIONS_CONTROLLERS\u003c\/code\u003e\u003c\/a\u003e makes it possible to respond to \u003ca href=\u0022https:\/\/github.com\/shogun-toolbox\/shogun\/blob\/41888fe7c8dc3797063d674f452e13351f321338\/src\/shogun\/lib\/StoppableSGObject.cpp#L24\u0022\u003esignals\u003c\/a\u003e during training.\nThis a helpful since we user can interrupt the training and then possibly resume. Moving these things to the base class \u003ccode\u003eStoppableSGObject\u003c\/code\u003e makes \u003ccode\u003eCMachine\u003c\/code\u003e class much cleaner.\nThe new macro \u003ccode\u003eSG_PROGRESS\u003c\/code\u003e is very nice. It makes progress bar more informative while requires few \u003ca href=\u0022https:\/\/github.com\/shogun-toolbox\/shogun\/pull\/4305\/files\u0022\u003echanges\u003c\/a\u003e.\nTo add a prefix like \u003ccode\u003eclass_name::method_name\u003c\/code\u003e to the progress bar, we only need to replace \u003ccode\u003eprogress\u003c\/code\u003e with the macro \u003ccode\u003eSG_PROGRESS\u003c\/code\u003e.\u003c\/p\u003e",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -121,7 +121,7 @@ Besides, the future work mentioned is very helpful for others who would like to 
 I am very excited to see these new features added.</p>
 <h4 id="response-for-shubhams-review">Response for Shubham&rsquo;s review</h4>
 <p>API like</p>
-<pre tabindex="0"><code>p.over(&quot;submean&quot;, transformer(&quot;PruneVarSubMean&quot;)).then(&quot;kmeans&quot;, machine(&quot;KMeans&quot;))
+<pre tabindex="0"><code>p.over(&#34;submean&#34;, transformer(&#34;PruneVarSubMean&#34;)).then(&#34;kmeans&#34;, machine(&#34;KMeans&#34;))
 </code></pre><p>is possible in Python and other interface.
 This is currently not possible in meta examples because of the limit of the translator.
 It would be good to support it in the future.</p>
@@ -163,21 +163,24 @@ I agree that this is important to help others to follow my work.</p>
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

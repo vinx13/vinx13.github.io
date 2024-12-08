@@ -4,18 +4,16 @@
     <title>TVM on Wuwei Lin</title>
     <link>http://wuwei.io/tags/tvm/</link>
     <description>Recent content in TVM on Wuwei Lin</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0800</lastBuildDate><atom:link href="http://wuwei.io/tags/tvm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://wuwei.io/tags/tvm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automating Optimization of Quantized Deep Learning Models on CUDA</title>
       <link>http://wuwei.io/post/2019/04/automating-optimization-of-quantized-deep-learning-models-on-cuda/</link>
       <pubDate>Tue, 30 Apr 2019 00:00:00 +0800</pubDate>
-      
       <guid>http://wuwei.io/post/2019/04/automating-optimization-of-quantized-deep-learning-models-on-cuda/</guid>
-      <description>Chinese version / 中文版
-Deep learning has been successfully applied to a variety of tasks. On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical. Network quantization is an effective approach to accelerating deep learning models. In quantized models, both data and model parameters are represented with low precision data types such as int8 and float16. The lowered data bandwidth reduces the inference time and memory/storage requirements, as well as the power consumption.</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/64461093&#34;&gt;Chinese version / 中文版&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Deep learning has been successfully applied to a variety of tasks.&#xA;On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical.&#xA;Network quantization is an effective approach to accelerating deep learning models.&#xA;In quantized models, both data and model parameters are represented with low precision data types such as &lt;code&gt;int8&lt;/code&gt; and &lt;code&gt;float16&lt;/code&gt;.&#xA;The lowered data bandwidth reduces the inference time and memory/storage requirements, as well as the power consumption.&#xA;Meanwhile, under proper quantization schemes, we can minimize the accuracy drops of the quantized models.&#xA;Therefore, quantized models are of particular interests of researchers and developers as it makes large models suitable to deploy on diverse devices, such as GPU, CPU and mobile devices.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
