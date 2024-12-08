@@ -4,6 +4,12 @@ type: project
 
 # Projects
 
+## MLC-LLM: Machine Learning Compilation for Large Language Models
+MLC-LLM is a universal solution that allows any language models to be deployed natively on a diverse set of hardware backends and native applications, plus a productive framework for everyone to further optimize model performance for their own use cases.
+
+* [Project Page](https://llm.mlc.ai)
+* [Repo](https://github.com/mlc-ai/mlc-llm)
+
 ## TVM: End to End Deep Learning Compiler Stack
 {{<image-box "/img/stack_tvmlang.png" >}}
 TVM is an open deep learning compiler stack for CPUs, GPUs and specialized accelerators. It aims to close the gap between the productivity-focused deep learning frameworks, and the performance- or efficiency-oriented hardware backends.  
@@ -15,8 +21,8 @@ Relay is a new high level intermediate representation of the computational graph
 The graph optimization eliminates unnecessary computation by combining and fusing parallel branches.
 I strive to reduce the difficulty of deployment of deep models and bring deep learning everywhere.
 
-* [TVM Project Page](https://tvm.ai)
-* [TVM Repo](https://github.com/dmlc/tvm/)
+* [Project Page](https://tvm.apache.org)
+* [Repo](https://github.com/apache/tvm/)
 
 ## Shogun Machine Learning Toolbox
 {{<image-box "/img/shogun.png" >}}
