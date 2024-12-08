@@ -4,6 +4,7 @@ title = "Wuwei Lin"
 theme = "hugo-classic"
 googleAnalytics = "G-C3R4MHW8C9"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+ignoreLogs = ['warning-goldmark-raw-html']
 preserveTaxonomyNames = true
 enableEmoji = true
 footnotereturnlinkcontents = "↩"
@@ -26,12 +27,13 @@ canonifyURLs = false
     url = "/index.xml"
 
 [params]
-    footer = "©2023 Wuwei Lin | Theme by [Hugo-Classic](https://github.com/vinx13/hugo-classic)" 
+    footer = "©2025 Wuwei Lin | Theme by [Hugo-Classic](https://github.com/vinx13/hugo-classic)" 
     custom_css = ["css/theme-override.css"]
 
-[author]
+[params.author]
     name = "Wuwei Lin"
 
 
 [taxonomies]
   tag = "tags"
+

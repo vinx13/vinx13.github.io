@@ -3,11 +3,9 @@ title: Home
 ---
 
 Hi, I am Wuwei Lin.
-I'm a software engineer at [OctoML](https://octoml.ai/).
+I'm a member of technical staff at [OpenAI](https://openai.com).
+Previously, I worked at [OctoAI](https://octo.ai) and [NVIDIA](https://nvidia.com).
 I received my master's degree from [Carnegie Mellon University](https://cmu.edu/) and bachelor's degree from [Shanghai Jiao Tong University](http://en.sjtu.edu.cn), [School of Software](http://en.se.sjtu.edu.cn).
-I am an active contributor and committer to [TVM](https://tvm.ai), with primary focus on quantized CUDA operators and Relay.
-I worked on [Shogun](http://shogun.ml) in [GSoC 2018](https://summerofcode.withgoogle.com/projects/6031654070517760/), for
-refactoring and redesigning transformers, feature representation and linalg, aimed at modernizing the long-historied machine learning toolbox and making it easy to use.
 I was an undergraduate research assistant in [MVIG](https://www.mvig.org) in the area of deep learning and computer vision.
 
 ### Links
@@ -17,9 +15,7 @@ I was an undergraduate research assistant in [MVIG](https://www.mvig.org) in the
 Check out [here](/project) for details of the exciting projects I work on.
 
 ### Publication
-* [Recurrent Residual Module for Fast Inference in Videos](http://openaccess.thecvf.com/content_cvpr_2018/papers/Pan_Recurrent_Residual_Module_CVPR_2018_paper.pdf)
-Bowen Pan, **Wuwei Lin**, Xiaolin Fang, Chaoqin Huang, Bolei Zhou, Cewu Lu. 
-Computer Vision and Pattern Recognition (CVPR), 2018 
+[Google Scholar](https://scholar.google.com/citations?user=nV_LyDoAAAAJ)
 
 ### Posts
 
