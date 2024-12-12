@@ -52,9 +52,9 @@
     "articleSection" : "post",
     "name" : "Bringing features and labels views to Shogun",
     "headline" : "Bringing features and labels views to Shogun",
-    "description" : "This week I\u0026rsquo;m happy to introduce the new thing to Shogun, features and labels view. In machine learning, operating on a subset of features or labels is usual, especially in recursive tree algorithms. The view, is a new instance of CFeatures or CLabels, or their subclasses, with a subset of data shared with the original instance. It is implemented as a global template function that accept a pointer or a small pointer to a viewable instance, and an index vector as arguments.",
+    "description" : "\u003cp\u003eThis week I\u0026rsquo;m happy to introduce the new thing to Shogun, features and labels view.\nIn machine learning, operating on a subset of features or labels is usual, especially in recursive tree algorithms.\nThe view, is a new instance of \u003ccode\u003eCFeatures\u003c\/code\u003e or \u003ccode\u003eCLabels\u003c\/code\u003e, or their subclasses, with a subset of data shared with the original instance.\nIt is implemented as a global template function that accept a pointer or a small pointer to a viewable instance, and an index vector as arguments.\u003c\/p\u003e",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -97,17 +97,17 @@
 In machine learning, operating on a subset of features or labels is usual, especially in recursive tree algorithms.
 The view, is a new instance of <code>CFeatures</code> or <code>CLabels</code>, or their subclasses, with a subset of data shared with the original instance.
 It is implemented as a global template function that accept a pointer or a small pointer to a viewable instance, and an index vector as arguments.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
-T<span style="color:#f92672">*</span> view(T<span style="color:#f92672">*</span> viewable, <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>index_t<span style="color:#f92672">&gt;&amp;</span> index)
-{
-    <span style="color:#66d9ef">auto</span> result <span style="color:#f92672">=</span> viewable<span style="color:#f92672">-&gt;</span>duplicate();
-    result<span style="color:#f92672">-&gt;</span>add_subset(index);
-    <span style="color:#66d9ef">return</span> result;
-}
-
-<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
-Some<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> view(Some<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> viewable, <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>index_t<span style="color:#f92672">&gt;&amp;</span> index);
-</code></pre></div><p>Using templates makes it possible creating views for any viewable classes, as long as it supports <code>duplicate</code> and subset functionalities.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>T<span style="color:#f92672">*</span> view(T<span style="color:#f92672">*</span> viewable, <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>index_t<span style="color:#f92672">&gt;&amp;</span> index)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> result <span style="color:#f92672">=</span> viewable<span style="color:#f92672">-&gt;</span>duplicate();
+</span></span><span style="display:flex;"><span>    result<span style="color:#f92672">-&gt;</span>add_subset(index);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Some<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> view(Some<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> viewable, <span style="color:#66d9ef">const</span> SGVector<span style="color:#f92672">&lt;</span>index_t<span style="color:#f92672">&gt;&amp;</span> index);
+</span></span></code></pre></div><p>Using templates makes it possible creating views for any viewable classes, as long as it supports <code>duplicate</code> and subset functionalities.
 <code>duplicate</code> is a virtual function that creates a shadow copy of the instance by calling the constructor of the class. Note that we require it to be virtual so we can create an instance of subclasses given a pointer of the base class.</p>
 <p><strong>Motivation</strong><br>
 Why do we need views? Before it, we used subsets directly: given an instance of features or labels, we call <code>add_subset</code> to add an index vector to the subset stack.
@@ -151,21 +151,24 @@ Why don&rsquo;t we make it a method of <code>CFeatures</code> and <code>CLabels<
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

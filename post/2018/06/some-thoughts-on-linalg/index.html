@@ -52,9 +52,9 @@
     "articleSection" : "post",
     "name" : "Some thoughts on linalg",
     "headline" : "Some thoughts on linalg",
-    "description" : "So in the next two weeks I\u0026rsquo;m going to work on refactoring linalg of Shogun. The data types in Shogun, SGVector\u0026lt;T\u0026gt;, SGMatrix\u0026lt;T\u0026gt; are templated classes which maintain a piece of memory in either CPU or GPU and provide basic operations like array-like element access. linalg::, is the upper level module working with SGVector, SGMatrix, providing linalg algebra operations, like matrix additions \/ multiplications.\nThough SGVector and SGMatrix, as template classes, are capable to represent different data types (float32_t, float64_t, etc.",
+    "description" : "\u003cp\u003eSo in the next two weeks I\u0026rsquo;m going to work on refactoring linalg of Shogun.\nThe data types in Shogun, \u003ccode\u003eSGVector\u0026lt;T\u0026gt;\u003c\/code\u003e, \u003ccode\u003eSGMatrix\u0026lt;T\u0026gt;\u003c\/code\u003e are templated classes which maintain a piece of memory in either CPU or GPU and provide basic operations like array-like element access.\n\u003ccode\u003elinalg::\u003c\/code\u003e, is the upper level module working with \u003ccode\u003eSGVector\u003c\/code\u003e, \u003ccode\u003eSGMatrix\u003c\/code\u003e, providing linalg algebra operations, like matrix additions \/ multiplications.\u003c\/p\u003e\n\u003cp\u003eThough \u003ccode\u003eSGVector\u003c\/code\u003e and \u003ccode\u003eSGMatrix\u003c\/code\u003e, as template classes, are capable to represent different data types (\u003ccode\u003efloat32_t\u003c\/code\u003e, \u003ccode\u003efloat64_t\u003c\/code\u003e, etc.), most algorithms in Shogun actually do not behave generically.\nThey accept \u003ccode\u003eCFeatures*\u003c\/code\u003e as input but later expect them to be dense features with \u003ccode\u003efloat64_t\u003c\/code\u003e element type. This is most of the cases in Shogun.\u003c\/p\u003e",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -99,18 +99,18 @@ The data types in Shogun, <code>SGVector&lt;T&gt;</code>, <code>SGMatrix&lt;T&gt
 <p>Though <code>SGVector</code> and <code>SGMatrix</code>, as template classes, are capable to represent different data types (<code>float32_t</code>, <code>float64_t</code>, etc.), most algorithms in Shogun actually do not behave generically.
 They accept <code>CFeatures*</code> as input but later expect them to be dense features with <code>float64_t</code> element type. This is most of the cases in Shogun.</p>
 <p>There are ad-hoc solutions. For example, take a look at code of <code>LDA</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> LDA<span style="color:#f92672">::</span>train_machine(CFeatures<span style="color:#f92672">*</span> data)
-{
-    CDotFeatures<span style="color:#f92672">*</span> features;
-    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_SHORTREAL)
-        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>float32_t<span style="color:#f92672">&gt;</span>();
-    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_DREAL)
-        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>float64_t<span style="color:#f92672">&gt;</span>();
-    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_LONGREAL)
-        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>floatmax_t<span style="color:#f92672">&gt;</span>(); 
-}
-</code></pre></div><p>We check the type in runtime and then call templated implementations. This solves the problem to some extent but we have to repeat similar things everywhere. And it does not make much sense to check the type in algorithm implementations since whether a specific data type is supported does not depend on the algorithm itself but the underlying mathematics operations used instead.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> LDA<span style="color:#f92672">::</span>train_machine(CFeatures<span style="color:#f92672">*</span> data)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    CDotFeatures<span style="color:#f92672">*</span> features;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_SHORTREAL)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>float32_t<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_DREAL)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>float64_t<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (features<span style="color:#f92672">-&gt;</span>get_feature_type() <span style="color:#f92672">==</span> F_LONGREAL)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> train_machine_templated<span style="color:#f92672">&lt;</span>floatmax_t<span style="color:#f92672">&gt;</span>(); 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We check the type in runtime and then call templated implementations. This solves the problem to some extent but we have to repeat similar things everywhere. And it does not make much sense to check the type in algorithm implementations since whether a specific data type is supported does not depend on the algorithm itself but the underlying mathematics operations used instead.</p>
 <p>Another issue is linalg.
 Backed by Eigen or ViennaCL, linalg offers unified interface to backends.
 However, the number of interface in linalg is growing.
@@ -119,12 +119,12 @@ In this way we actually break ABI compatibility.</p>
 <p>Besides, since data can be in either CPU or GPU, linalg has to check where data lives every time because it lacks context of former calls.
 Of course setting a global context is not the best choice since this is not a thread-safe way.</p>
 <p>So we are moving towards a un-templated type: <code>Matrix</code>, <code>Vector</code>, without the template argument <code>T</code>. Then everything will be checked in runtime. We will have <code>Matrix</code> implemented as something like</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span>
-{
-    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> data;
-    Type type;
-};
-</code></pre></div><p>This is actually from the ongoing PR last year.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> data;
+</span></span><span style="display:flex;"><span>    Type type;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This is actually from the ongoing PR last year.
 However, in this case, we have to use a big switch to invoke the corresponding operation every time. This is much like the CPU/GPU checking problem above.</p>
 <p>With these challenges in mind, in the upcoming weeks I will be working on some new design of <code>linalg</code>.
 Stay tuned for updates :)</p>
@@ -160,21 +160,24 @@ Stay tuned for updates :)</p>
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

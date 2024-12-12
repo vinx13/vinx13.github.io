@@ -52,9 +52,9 @@
     "articleSection" : "post",
     "name" : "Automating Optimization of Quantized Deep Learning Models on CUDA",
     "headline" : "Automating Optimization of Quantized Deep Learning Models on CUDA",
-    "description" : "Chinese version \/ 中文版\nDeep learning has been successfully applied to a variety of tasks. On real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical. Network quantization is an effective approach to accelerating deep learning models. In quantized models, both data and model parameters are represented with low precision data types such as int8 and float16. The lowered data bandwidth reduces the inference time and memory\/storage requirements, as well as the power consumption.",
+    "description" : "\u003cp\u003e\u003ca href=\u0022https:\/\/zhuanlan.zhihu.com\/p\/64461093\u0022\u003eChinese version \/ 中文版\u003c\/a\u003e\u003c\/p\u003e\n\u003cp\u003eDeep learning has been successfully applied to a variety of tasks.\nOn real-time scenarios such as inference on autonomous vehicles, the inference speed of the model is critical.\nNetwork quantization is an effective approach to accelerating deep learning models.\nIn quantized models, both data and model parameters are represented with low precision data types such as \u003ccode\u003eint8\u003c\/code\u003e and \u003ccode\u003efloat16\u003c\/code\u003e.\nThe lowered data bandwidth reduces the inference time and memory\/storage requirements, as well as the power consumption.\nMeanwhile, under proper quantization schemes, we can minimize the accuracy drops of the quantized models.\nTherefore, quantized models are of particular interests of researchers and developers as it makes large models suitable to deploy on diverse devices, such as GPU, CPU and mobile devices.\u003c\/p\u003e",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -158,15 +158,15 @@ Details of how to launch automatic optimization can be found in the <a href="htt
 <!-- raw HTML omitted -->
 <p>TVM provides an easy workflow to quantize trained models from other frameworks, automatically optimize operators (with AutoTVM), and deploy to different devices.</p>
 <p>First, we use the Relay frontend to import existing models. Here we use an MXNet model with <code>(1, 3, 224, 224)</code> input shape as an example.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sym, arg_params, aux_params <span style="color:#f92672">=</span> mxnet<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>load_checkpoint(model_path, epoch)
-net, params <span style="color:#f92672">=</span> relay<span style="color:#f92672">.</span>from_mxnet(sym, shape<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;data&#39;</span>: (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>)}, arg_params<span style="color:#f92672">=</span>arg_params, aux_params<span style="color:#f92672">=</span>aux_params)
-</code></pre></div><p>Next, we use the relay quantization API to convert it to a quantized model.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">net <span style="color:#f92672">=</span> relay<span style="color:#f92672">.</span>quantize<span style="color:#f92672">.</span>quantize(sym, params<span style="color:#f92672">=</span>params)
-</code></pre></div><p>Then, we use AutoTVM to extract tuning tasks for the operators in the model and perform automatic optimization. The <a href="https://docs.tvm.ai/tutorials/autotvm/tune_relay_cuda.html">AutoTVM tutorial</a> provides an example for this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sym, arg_params, aux_params <span style="color:#f92672">=</span> mxnet<span style="color:#f92672">.</span>model<span style="color:#f92672">.</span>load_checkpoint(model_path, epoch)
+</span></span><span style="display:flex;"><span>net, params <span style="color:#f92672">=</span> relay<span style="color:#f92672">.</span>from_mxnet(sym, shape<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;data&#39;</span>: (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>)}, arg_params<span style="color:#f92672">=</span>arg_params, aux_params<span style="color:#f92672">=</span>aux_params)
+</span></span></code></pre></div><p>Next, we use the relay quantization API to convert it to a quantized model.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>net <span style="color:#f92672">=</span> relay<span style="color:#f92672">.</span>quantize<span style="color:#f92672">.</span>quantize(sym, params<span style="color:#f92672">=</span>params)
+</span></span></code></pre></div><p>Then, we use AutoTVM to extract tuning tasks for the operators in the model and perform automatic optimization. The <a href="https://docs.tvm.ai/tutorials/autotvm/tune_relay_cuda.html">AutoTVM tutorial</a> provides an example for this.</p>
 <p>Finally, we build the model and run inference in the quantized mode.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> relay<span style="color:#f92672">.</span>build_config(opt_level<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>):
-    graph, lib, params <span style="color:#f92672">=</span> relay<span style="color:#f92672">.</span>build(net, target)
-</code></pre></div><p>The result of <code>relay.build</code> is a deployable library.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> relay<span style="color:#f92672">.</span>build_config(opt_level<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>):
+</span></span><span style="display:flex;"><span>    graph, lib, params <span style="color:#f92672">=</span> relay<span style="color:#f92672">.</span>build(net, target)
+</span></span></code></pre></div><p>The result of <code>relay.build</code> is a deployable library.
 We can either run inference <a href="https://docs.tvm.ai/tutorials/frontend/from_mxnet.html#execute-the-portable-graph-on-tvm">on the GPU</a> directly or deploy <a href="https://docs.tvm.ai/tutorials/frontend/deploy_model_on_rasp.html#deploy-the-model-remotely-by-rpc">on the remote devices</a> via RPC.</p>
 <h1 id="benchmark">Benchmark</h1>
 <p>To verify the performance of the quantized operators in TVM, we benchmark the performance of several popular network models including VGG-19, ResNet-50 and Inception V3.
@@ -224,21 +224,24 @@ We show that automatic optimization in TVM makes it easy and flexible to support
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>

@@ -4,35 +4,30 @@
     <title>Tags on Wuwei Lin</title>
     <link>http://wuwei.io/tags/</link>
     <description>Recent content in Tags on Wuwei Lin</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0800</lastBuildDate><atom:link href="http://wuwei.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://wuwei.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TVM</title>
       <link>http://wuwei.io/tags/tvm/</link>
       <pubDate>Tue, 30 Apr 2019 00:00:00 +0800</pubDate>
-      
       <guid>http://wuwei.io/tags/tvm/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>GSoC</title>
       <link>http://wuwei.io/tags/gsoc/</link>
       <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
-      
       <guid>http://wuwei.io/tags/gsoc/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Shogun</title>
       <link>http://wuwei.io/tags/shogun/</link>
       <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
-      
       <guid>http://wuwei.io/tags/shogun/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

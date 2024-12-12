@@ -54,7 +54,7 @@
     "headline" : "",
     "description" : "",
     "inLanguage" : "en-US",
-    "author" : "Wuwei Lin",
+    ".Site.Params.Author" : "Wuwei Lin",
     "creator" : "Wuwei Lin",
     "publisher": "Wuwei Lin",
     "accountablePerson" : "Wuwei Lin",
@@ -63,7 +63,7 @@
     "datePublished": "0001-01-01 00:00:00 \u002b0000 UTC",
     "dateModified" : "0001-01-01 00:00:00 \u002b0000 UTC",
     "url" : "http:\/\/wuwei.io\/project\/",
-    "wordCount" : "355",
+    "wordCount" : "404",
     "keywords" : [ "Blog" ]
 }
 </script>
@@ -77,6 +77,12 @@
 
 
 <h1 id="projects">Projects</h1>
+<h2 id="mlc-llm-machine-learning-compilation-for-large-language-models">MLC-LLM: Machine Learning Compilation for Large Language Models</h2>
+<p>MLC-LLM is a universal solution that allows any language models to be deployed natively on a diverse set of hardware backends and native applications, plus a productive framework for everyone to further optimize model performance for their own use cases.</p>
+<ul>
+<li><a href="https://llm.mlc.ai">Project Page</a></li>
+<li><a href="https://github.com/mlc-ai/mlc-llm">Repo</a></li>
+</ul>
 <h2 id="tvm-end-to-end-deep-learning-compiler-stack">TVM: End to End Deep Learning Compiler Stack</h2>
 <p><div class="image-box">
     <img src="/img/stack_tvmlang.png">
@@ -90,8 +96,8 @@ Relay is a new high level intermediate representation of the computational graph
 The graph optimization eliminates unnecessary computation by combining and fusing parallel branches.
 I strive to reduce the difficulty of deployment of deep models and bring deep learning everywhere.</p>
 <ul>
-<li><a href="https://tvm.ai">TVM Project Page</a></li>
-<li><a href="https://github.com/dmlc/tvm/">TVM Repo</a></li>
+<li><a href="https://tvm.apache.org">Project Page</a></li>
+<li><a href="https://github.com/apache/tvm/">Repo</a></li>
 </ul>
 <h2 id="shogun-machine-learning-toolbox">Shogun Machine Learning Toolbox</h2>
 <p><div class="image-box">
@@ -156,21 +162,24 @@ Experiment results show that our module yields significant inference speedup whi
 </script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-C3R4MHW8C9', { 'anonymize_ip': false });
-}
-</script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3R4MHW8C9"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C3R4MHW8C9');
+        }
+      </script>
 
       
       <hr/>
-      ©2023 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
+      ©2025 Wuwei Lin | Theme by <a href="https://github.com/vinx13/hugo-classic">Hugo-Classic</a>
       
     </footer>
   </body>
